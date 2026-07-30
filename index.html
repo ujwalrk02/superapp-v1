@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AkiPaga — Home</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --emerald-900:#063C2E;
+    --emerald-700:#0B6B4F;
+    --emerald-500:#128A63;
+    --blue-600:#2451B8;
+    --orange-500:#F2994A;
+    --success:#219653;
+    --warning:#F2C94C;
+    --error:#EB5757;
+    --bg:#F3F5F4;
+    --card:#FFFFFF;
+    --ink-900:#0E1F1A;
+    --ink-600:#5B6B65;
+    --ink-400:#93A29C;
+    --line:#E6ECE9;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    font-family:'Inter',sans-serif;
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .device{
+    width:390px;
+    height:844px;
+    background:var(--bg);
+    border-radius:44px;
+    overflow:hidden;
+    position:relative;
+    box-shadow: 0 0 0 10px #0d0d0d, 0 0 0 12px #2b2b2b;
+    margin:24px;
+  }
+
+  .scroll{
+    height:100%;
+    overflow-y:auto;
+    padding-bottom:110px;
+    scrollbar-width:none;
+  }
+  .scroll::-webkit-scrollbar{display:none;}
+
+  /* Status bar */
+  .statusbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 26px 6px;
+    font-size:14px; font-weight:700;
+    color:var(--ink-900);
+  }
+  .statusbar .icons{display:flex; gap:6px; align-items:center; font-size:12px; color:var(--ink-900);}
+
+  /* Header */
+  .header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:8px 20px 4px;
+  }
+  .greet-block{display:flex; gap:10px; align-items:center;}
+  .avatar{
+    width:44px;height:44px;border-radius:50%;
+    background:linear-gradient(135deg,var(--emerald-500),var(--blue-600));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:'Manrope';font-weight:800;font-size:16px;
+    box-shadow:0 4px 10px rgba(11,107,79,0.25);
+  }
+  .greet-text .hi{font-family:'Manrope';font-weight:800;font-size:15px;line-height:1.1;}
+  .greet-text .loc{font-size:12px;color:var(--ink-600);display:flex;align-items:center;gap:3px;margin-top:2px;}
+  .header-actions{display:flex; gap:10px; align-items:center;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--card);
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;
+    box-shadow:0 2px 6px rgba(14,31,26,0.06);
+    position:relative;
+    flex-shrink:0;
+  }
+  .dot{
+    position:absolute; top:7px; right:7px;
+    width:7px;height:7px;border-radius:50%;background:var(--error);
+    border:1.5px solid var(--card);
+  }
+  .lang-toggle{
+    font-size:11px; font-weight:700; color:var(--emerald-700);
+    background:#E4F1EC; border-radius:20px; padding:6px 10px;
+    display:flex; align-items:center; gap:4px; white-space:nowrap;
+  }
+
+  /* Search */
+  .search-wrap{padding:14px 20px 4px;}
+  .search-bar{
+    background:var(--card); border-radius:18px; padding:13px 16px;
+    display:flex; align-items:center; gap:10px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05);
+    border:1px solid var(--line);
+  }
+  .search-bar input{
+    border:none; outline:none; background:transparent; flex:1;
+    font-size:14px; font-family:'Inter'; color:var(--ink-900);
+  }
+  .search-bar input::placeholder{color:var(--ink-400);}
+  .mic{
+    width:28px;height:28px;border-radius:50%;background:var(--emerald-700);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;
+  }
+
+  /* Wallet Hero */
+  .wallet-section{padding:16px 20px 6px;}
+  .wallet-card{
+    position:relative;
+    border-radius:26px;
+    padding:22px 22px 18px;
+    background:
+      radial-gradient(120% 140% at 100% 0%, rgba(255,255,255,0.14), transparent 55%),
+      linear-gradient(135deg, var(--emerald-900) 0%, var(--emerald-700) 48%, var(--blue-600) 130%);
+    color:#fff;
+    overflow:hidden;
+    box-shadow:0 18px 34px -14px rgba(6,60,46,0.55);
+  }
+  .wallet-card::after{
+    content:"";
+    position:absolute; width:220px; height:220px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.10), transparent 70%);
+    top:-90px; right:-60px;
+  }
+  .wallet-top{display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:1;}
+  .wallet-label{font-size:12px; opacity:0.75; font-weight:600; letter-spacing:0.3px;}
+  .wallet-balance{font-family:'Manrope'; font-weight:800; font-size:28px; margin-top:4px;}
+  .wallet-badge{
+    font-size:10.5px; font-weight:700; background:rgba(255,255,255,0.16);
+    padding:6px 10px; border-radius:20px; display:flex; align-items:center; gap:5px;
+  }
+  .wallet-sub{display:flex; gap:16px; margin-top:12px; font-size:11.5px; opacity:0.9; position:relative; z-index:1;}
+  .wallet-sub div{display:flex; flex-direction:column;}
+  .wallet-sub b{font-family:'Manrope'; font-size:13px; font-weight:800;}
+
+  .quick-row{
+    display:flex; justify-content:space-between; margin-top:18px; position:relative; z-index:1;
+  }
+  .qa-item{display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;}
+  .qa-circle{
+    width:46px;height:46px;border-radius:16px;
+    background:rgba(255,255,255,0.16);
+    backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .qa-item span{font-size:10.5px; font-weight:600; opacity:0.92;}
+
+  /* Section title */
+  .section{padding:20px 20px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;
+  }
+  .section-head h3{
+    font-family:'Manrope'; font-size:15.5px; font-weight:800; margin:0; color:var(--ink-900);
+  }
+  .section-head a{font-size:12px; color:var(--emerald-700); font-weight:700; text-decoration:none; cursor:pointer;}
+
+  /* Grid quick actions */
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .grid-item{
+    background:var(--card); border-radius:18px; padding:14px 8px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05);
+  }
+  .grid-ico{
+    width:42px;height:42px;border-radius:13px;
+    display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff;
+  }
+  .grid-item span{font-size:11px; font-weight:600; text-align:center; color:var(--ink-900); line-height:1.15;}
+
+  /* Bills */
+  .bills-card{
+    background:var(--card); border-radius:20px; padding:6px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05);
+    display:flex; overflow-x:auto; gap:10px; scrollbar-width:none;
+  }
+  .bills-card::-webkit-scrollbar{display:none;}
+  .bill-item{
+    min-width:132px; background:#F7F9F8; border-radius:15px; padding:12px;
+    display:flex; flex-direction:column; gap:8px; flex-shrink:0;
+  }
+  .bill-top{display:flex; align-items:center; gap:8px;}
+  .bill-ico{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;}
+  .bill-name{font-size:12px; font-weight:700;}
+  .bill-status{font-size:10.5px; color:var(--ink-600);}
+  .bill-status.due{color:var(--orange-500); font-weight:700;}
+  .bill-status.paid{color:var(--success); font-weight:700;}
+  .bill-btn{
+    font-size:10.5px; font-weight:700; color:#fff; background:var(--emerald-700);
+    border-radius:9px; text-align:center; padding:6px 0;
+  }
+
+  /* Carousel */
+  .hcarousel{display:flex; gap:12px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;}
+  .hcarousel::-webkit-scrollbar{display:none;}
+  .mini-card{
+    min-width:150px; background:var(--card); border-radius:18px; padding:14px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05); flex-shrink:0;
+  }
+  .mini-ico{
+    width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+    font-size:16px;color:#fff; margin-bottom:10px;
+  }
+  .mini-title{font-size:12.5px; font-weight:700; margin-bottom:2px;}
+  .mini-sub{font-size:10.5px; color:var(--ink-600); line-height:1.3;}
+
+  /* Daily essentials */
+  .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  .cat-card{
+    background:var(--card); border-radius:18px; padding:16px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05);
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .cat-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .cat-ico{font-size:24px;}
+  .cat-arrow{
+    width:26px;height:26px;border-radius:50%;background:#F0F3F1;
+    display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink-600);
+  }
+  .cat-name{font-family:'Manrope'; font-weight:800; font-size:14px;}
+  .cat-sub{font-size:10.5px; color:var(--ink-600); margin-top:2px;}
+
+  /* Nearby */
+  .nearby-card{
+    min-width:168px; background:var(--card); border-radius:18px; overflow:hidden;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05); flex-shrink:0;
+  }
+  .nearby-map{
+    height:64px; background:
+      linear-gradient(0deg, rgba(11,107,79,0.10), rgba(36,81,184,0.10)),
+      repeating-linear-gradient(45deg, #EAF0EE 0 8px, #E2E9E6 8px 16px);
+    position:relative;
+  }
+  .nearby-pin{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:26px;height:26px;border-radius:50% 50% 50% 0; rotate:-45deg;
+    background:var(--emerald-700); display:flex;align-items:center;justify-content:center;
+  }
+  .nearby-pin span{rotate:45deg; font-size:11px;}
+  .nearby-body{padding:10px 12px 12px;}
+  .nearby-name{font-size:12px; font-weight:700;}
+  .nearby-meta{display:flex; justify-content:space-between; margin-top:4px; font-size:10px; color:var(--ink-600);}
+  .open{color:var(--success); font-weight:700;}
+  .nearby-btn{
+    margin-top:8px; font-size:10.5px; font-weight:700; text-align:center;
+    border:1.4px solid var(--emerald-700); color:var(--emerald-700); border-radius:9px; padding:5px 0;
+  }
+
+  /* Promotions */
+  .promo-card{
+    min-width:250px; height:100px; border-radius:18px; flex-shrink:0;
+    padding:14px 16px; color:#fff; display:flex; flex-direction:column; justify-content:center; gap:4px;
+    position:relative; overflow:hidden;
+  }
+  .promo-card::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;
+    background:rgba(255,255,255,0.15); right:-40px; top:-40px;}
+  .promo-title{font-family:'Manrope'; font-weight:800; font-size:15px; position:relative; z-index:1;}
+  .promo-sub{font-size:11px; opacity:0.9; position:relative; z-index:1;}
+
+  /* Recent activity */
+  .activity-list{background:var(--card); border-radius:18px; box-shadow:0 2px 8px rgba(14,31,26,0.05); overflow:hidden;}
+  .activity-row{
+    display:flex; align-items:center; gap:12px; padding:13px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .activity-row:last-child{border-bottom:none;}
+  .act-ico{
+    width:38px;height:38px;border-radius:12px;background:#F0F3F1;
+    display:flex;align-items:center;justify-content:center;font-size:16px; flex-shrink:0;
+  }
+  .act-mid{flex:1;}
+  .act-name{font-size:12.5px; font-weight:700;}
+  .act-date{font-size:10.5px; color:var(--ink-600); margin-top:1px;}
+  .act-amt{font-size:12.5px; font-weight:800; text-align:right;}
+  .act-status{font-size:9.5px; text-align:right; margin-top:2px; font-weight:700;}
+  .act-status.done{color:var(--success);}
+  .act-status.pending{color:var(--orange-500);}
+
+  /* Business hub toggle */
+  .toggle-row{display:flex; align-items:center; gap:8px; font-size:11px; color:var(--ink-600); font-weight:600;}
+  .switch{
+    width:34px;height:19px;border-radius:20px;background:var(--emerald-700);
+    position:relative; cursor:pointer; flex-shrink:0;
+  }
+  .switch::after{content:"";position:absolute; width:15px;height:15px;border-radius:50%;
+    background:#fff; top:2px; right:2px;}
+
+  /* Financial health */
+  .fh-card{background:var(--card); border-radius:20px; padding:16px; box-shadow:0 2px 8px rgba(14,31,26,0.05);}
+  .fh-row{display:flex; justify-content:space-between; margin-bottom:12px;}
+  .fh-item b{font-family:'Manrope'; font-size:14px; display:block;}
+  .fh-item span{font-size:10.5px; color:var(--ink-600);}
+  .bar-track{height:8px; border-radius:6px; background:#EDF1EF; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px;}
+
+  /* Bottom nav */
+  .bottomnav{
+    position:absolute; bottom:0; left:0; right:0; z-index:40;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-around; align-items:center;
+    padding:10px 8px 22px;
+  }
+  .nav-item{display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9.5px; color:var(--ink-400); font-weight:700; cursor:pointer;}
+  .nav-item.active{color:var(--emerald-700);}
+  .nav-ico{font-size:18px;}
+
+  /* FAB */
+  .fab{
+    position:absolute; right:20px; bottom:92px; z-index:41;
+    width:58px;height:58px;border-radius:50%;
+    background:linear-gradient(135deg,var(--emerald-500),var(--emerald-900));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;
+    box-shadow:0 10px 22px -6px rgba(11,107,79,0.6);
+    border:3px solid #fff; cursor:pointer;
+  }
+
+  ::selection{background:var(--emerald-500); color:#fff;}
+
+  /* Clickable affordance */
+  .tappable{cursor:pointer; transition:transform .12s ease, opacity .12s ease;}
+  .tappable:active{transform:scale(0.94); opacity:0.85;}
+
+  /* ===== Slide-in full screens ===== */
+  .screen{
+    position:absolute; inset:0; z-index:60;
+    background:var(--bg);
+    transform:translateX(100%);
+    transition:transform .36s cubic-bezier(.22,.9,.32,1);
+    display:flex; flex-direction:column;
+  }
+  .screen.active{transform:translateX(0);}
+  .screen-header{
+    display:flex; align-items:center; gap:12px;
+    padding:18px 18px 14px;
+  }
+  .back-btn{
+    width:36px;height:36px;border-radius:50%;background:var(--card);
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+    box-shadow:0 2px 6px rgba(14,31,26,0.06); flex-shrink:0; cursor:pointer;
+  }
+  .screen-title{font-family:'Manrope'; font-weight:800; font-size:16px; flex:1;}
+  .screen-body{flex:1; overflow-y:auto; scrollbar-width:none; padding-bottom:30px;}
+  .screen-body::-webkit-scrollbar{display:none;}
+
+  /* Scan QR screen (camera mock) */
+  .cam-screen{background:linear-gradient(180deg,#0B1F19 0%, #12241E 60%, #0B1F19 100%); color:#fff;}
+  .cam-screen .back-btn, .cam-screen .flash-btn{background:rgba(255,255,255,0.14); color:#fff; box-shadow:none;}
+  .cam-screen .screen-header{justify-content:space-between;}
+  .cam-view{
+    flex:1; display:flex; align-items:center; justify-content:center; position:relative;
+    background:
+      radial-gradient(120% 90% at 50% 20%, rgba(18,138,99,0.25), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 4px);
+  }
+  .scan-frame{width:220px; height:220px; position:relative;}
+  .scan-frame span{position:absolute; width:34px; height:34px; border-color:#3FE0A8;}
+  .corner-tl{top:0;left:0;border-top:4px solid #3FE0A8;border-left:4px solid #3FE0A8;border-radius:12px 0 0 0;}
+  .corner-tr{top:0;right:0;border-top:4px solid #3FE0A8;border-right:4px solid #3FE0A8;border-radius:0 12px 0 0;}
+  .corner-bl{bottom:0;left:0;border-bottom:4px solid #3FE0A8;border-left:4px solid #3FE0A8;border-radius:0 0 0 12px;}
+  .corner-br{bottom:0;right:0;border-bottom:4px solid #3FE0A8;border-right:4px solid #3FE0A8;border-radius:0 0 12px 0;}
+  .scan-line{
+    position:absolute; left:6px; right:6px; height:2px;
+    background:linear-gradient(90deg,transparent,#3FE0A8,transparent);
+    animation:scanmove 2.1s ease-in-out infinite;
+  }
+  @keyframes scanmove{0%{top:8px;} 50%{top:206px;} 100%{top:8px;}}
+  .cam-hint{position:absolute; bottom:-46px; left:0; right:0; text-align:center; font-size:12.5px; color:rgba(255,255,255,0.75);}
+  .cam-sheet{background:var(--card); border-radius:24px 24px 0 0; padding:18px 20px 26px; color:var(--ink-900);}
+  .cam-sheet-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .cam-sheet-title{font-family:'Manrope'; font-weight:800; font-size:14px;}
+  .cam-toggle-btn{font-size:11.5px; font-weight:700; color:var(--emerald-700); background:#E4F1EC; border-radius:20px; padding:6px 12px;}
+  .recent-chip-row{display:flex; gap:8px; overflow-x:auto; scrollbar-width:none;}
+  .recent-chip-row::-webkit-scrollbar{display:none;}
+  .recent-chip{min-width:64px; display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0;}
+  .recent-chip .rc-ico{width:44px;height:44px;border-radius:50%; background:#F0F3F1; display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .recent-chip span{font-size:9.5px; color:var(--ink-600); font-weight:600; text-align:center;}
+
+  /* ===== Generic FORM template ===== */
+  .chip-row{display:flex; gap:10px; padding:0 20px;}
+  .chip-card{
+    flex:1; background:var(--card); border-radius:16px; padding:12px 8px;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05); border:2px solid transparent; cursor:pointer;
+  }
+  .chip-card.selected{border-color:var(--emerald-700); background:#EEF7F3;}
+  .chip-logo{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800;font-family:'Manrope';}
+  .chip-card span{font-size:11px; font-weight:700; text-align:center;}
+
+  .field-block{padding:18px 20px 0;}
+  .field-label{font-size:11.5px; font-weight:700; color:var(--ink-600); margin-bottom:8px;}
+  .text-input{
+    background:var(--card); border-radius:16px; padding:14px 16px; display:flex; align-items:center; gap:10px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05); border:1px solid var(--line);
+    font-size:14px; font-weight:600; color:var(--ink-900);
+  }
+  .text-input .ph{color:var(--ink-400); font-weight:500;}
+  .amount-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
+  .amount-chip{
+    background:var(--card); border-radius:14px; padding:12px 0; width:calc(25% - 7.5px);
+    text-align:center; font-size:12.5px; font-weight:700; box-shadow:0 2px 8px rgba(14,31,26,0.05);
+    border:2px solid transparent; cursor:pointer;
+  }
+  .amount-chip.selected{border-color:var(--emerald-700); background:#EEF7F3; color:var(--emerald-700);}
+  .continue-btn{
+    margin:24px 20px 0; background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));
+    color:#fff; text-align:center; padding:15px 0; border-radius:16px;
+    font-family:'Manrope'; font-weight:800; font-size:14px;
+    box-shadow:0 12px 22px -10px rgba(11,107,79,0.6); cursor:pointer;
+  }
+  .summary-card{
+    margin:16px 20px 0; background:var(--card); border-radius:16px; padding:14px 16px;
+    box-shadow:0 2px 8px rgba(14,31,26,0.05); display:flex; justify-content:space-between; align-items:center;
+  }
+  .summary-card .lbl{font-size:11.5px; color:var(--ink-600);}
+  .summary-card .val{font-family:'Manrope'; font-weight:800; font-size:16px;}
+
+  /* ===== Generic LIST template ===== */
+  .list-row{
+    background:var(--card); border-radius:16px; padding:12px 14px; margin:0 20px 12px;
+    display:flex; align-items:center; gap:12px; box-shadow:0 2px 8px rgba(14,31,26,0.05); cursor:pointer;
+    border:2px solid transparent;
+  }
+  .list-row.selected{border-color:var(--emerald-700); background:#EEF7F3;}
+  .list-ico{width:42px;height:42px;border-radius:13px; display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff; flex-shrink:0;}
+  .list-mid{flex:1;}
+  .list-name{font-size:13px; font-weight:700;}
+  .list-sub{font-size:10.5px; color:var(--ink-600); margin-top:2px;}
+  .list-right{text-align:right; flex-shrink:0;}
+  .list-price{font-family:'Manrope'; font-weight:800; font-size:13px;}
+  .list-meta{font-size:9.5px; color:var(--ink-600); margin-top:2px;}
+  .list-btn{
+    font-size:10.5px; font-weight:700; color:var(--emerald-700); background:#E4F1EC;
+    border-radius:9px; padding:6px 10px; margin-top:6px; display:inline-block;
+  }
+
+  /* ===== Bottom sheet ===== */
+  .sheet-overlay{
+    position:absolute; inset:0; z-index:70; background:rgba(6,18,14,0.45);
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .sheet-overlay.active{opacity:1; pointer-events:auto;}
+  .sheet{
+    position:absolute; left:0; right:0; bottom:0;
+    background:var(--card); border-radius:26px 26px 0 0;
+    padding:10px 22px 28px;
+    transform:translateY(100%); transition:transform .34s cubic-bezier(.22,.9,.32,1);
+    max-height:78%; overflow-y:auto; scrollbar-width:none;
+  }
+  .sheet::-webkit-scrollbar{display:none;}
+  .sheet-overlay.active .sheet{transform:translateY(0);}
+  .sheet-handle{width:38px;height:5px;border-radius:6px;background:var(--line); margin:0 auto 16px;}
+  .sheet-head{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .sheet-ico{width:48px;height:48px;border-radius:15px; display:flex;align-items:center;justify-content:center;font-size:21px;color:#fff; flex-shrink:0;}
+  .sheet-title{font-family:'Manrope'; font-weight:800; font-size:16px;}
+  .sheet-subtitle{font-size:11.5px; color:var(--ink-600); margin-top:2px;}
+  .sheet-desc{font-size:12.5px; color:var(--ink-600); line-height:1.5; margin:4px 0 6px;}
+  .sheet-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 0; border-bottom:1px solid var(--line); font-size:12.5px;
+  }
+  .sheet-row:last-of-type{border-bottom:none;}
+  .sheet-row .k{color:var(--ink-600);}
+  .sheet-row .v{font-weight:700;}
+  .sheet-cta{
+    margin-top:16px; background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));
+    color:#fff; text-align:center; padding:14px 0; border-radius:15px;
+    font-family:'Manrope'; font-weight:800; font-size:13.5px; cursor:pointer;
+  }
+  .sheet-cta.secondary{
+    background:#F0F3F1; color:var(--ink-900); margin-top:10px;
+  }
+  .sheet-menu-row{
+    display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); cursor:pointer;
+  }
+  .sheet-menu-row:last-child{border-bottom:none;}
+  .sheet-menu-row .mi{font-size:17px; width:26px; text-align:center;}
+  .sheet-menu-row .mt{font-size:13px; font-weight:600; flex:1;}
+</style>
+</head>
+<body>
+
+<div class="device" id="device">
+  <div class="scroll">
+
+    <!-- Status bar -->
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="icons"><span>••••</span><span>Wi-Fi</span><span>🔋</span></div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="greet-block">
+        <div class="avatar">J</div>
+        <div class="greet-text">
+          <div class="hi">Hi, João Nzau</div>
+          <div class="loc">📍 Luanda, Angola</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="lang-toggle">PT / EN / FR / 中文</div>
+        <div class="icon-btn tappable" data-act="notifications">🔔<span class="dot"></span></div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <div class="search-bar tappable" data-act="search">
+        <span>🔍</span>
+        <input placeholder="Search services, merchants or bills" readonly>
+        <div class="mic">🎙</div>
+      </div>
+    </div>
+
+    <!-- Wallet Hero -->
+    <div class="wallet-section">
+      <div class="wallet-card">
+        <div class="wallet-top">
+          <div>
+            <div class="wallet-label">Wallet Balance</div>
+            <div class="wallet-balance">AOA 245,000</div>
+          </div>
+          <div class="wallet-badge">⭐ 1,240 pts</div>
+        </div>
+        <div class="wallet-sub">
+          <div><span>Cashback earned</span><b>AOA 3,150</b></div>
+          <div><span>This month</span><b>+ AOA 42,000</b></div>
+        </div>
+        <div class="quick-row">
+          <div class="qa-item tappable" data-act="scan"><div class="qa-circle">▦</div><span>Scan QR</span></div>
+          <div class="qa-item tappable" data-act="send"><div class="qa-circle">↑</div><span>Send</span></div>
+          <div class="qa-item tappable" data-act="receive"><div class="qa-circle">↓</div><span>Receive</span></div>
+          <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle">＋</div><span>Add Money</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions Grid -->
+    <div class="section">
+      <div class="section-head"><h3>Quick Actions</h3><a data-act="explore">View more</a></div>
+      <div class="grid3">
+        <div class="grid-item tappable" data-act="scan"><div class="grid-ico" style="background:var(--emerald-700);">▦</div><span>Scan QR</span></div>
+        <div class="grid-item tappable" data-act="send"><div class="grid-ico" style="background:var(--blue-600);">↑</div><span>Send Money</span></div>
+        <div class="grid-item tappable" data-act="banktransfer"><div class="grid-ico" style="background:var(--emerald-500);">🏦</div><span>Bank Transfer</span></div>
+        <div class="grid-item tappable" data-act="utilitybills"><div class="grid-ico" style="background:var(--orange-500);">💡</div><span>Utility Bills</span></div>
+        <div class="grid-item tappable" data-act="airtime"><div class="grid-ico" style="background:var(--blue-600);">📶</div><span>Airtime</span></div>
+        <div class="grid-item tappable" data-act="mobiledata"><div class="grid-ico" style="background:var(--emerald-700);">📡</div><span>Mobile Data</span></div>
+        <div class="grid-item tappable" data-act="taxi"><div class="grid-ico" style="background:var(--orange-500);">🚕</div><span>Taxi</span></div>
+        <div class="grid-item tappable" data-act="food"><div class="grid-ico" style="background:var(--error);">🍔</div><span>Food Delivery</span></div>
+        <div class="grid-item tappable" data-act="courier"><div class="grid-ico" style="background:var(--ink-600);">📦</div><span>Courier</span></div>
+        <div class="grid-item tappable" data-act="pharmacy"><div class="grid-ico" style="background:var(--success);">💊</div><span>Pharmacy</span></div>
+        <div class="grid-item tappable" data-act="marketplace"><div class="grid-ico" style="background:var(--blue-600);">🛍️</div><span>Marketplace</span></div>
+        <div class="grid-item tappable" data-act="explore"><div class="grid-ico" style="background:var(--ink-400);">⋯</div><span>View More</span></div>
+      </div>
+    </div>
+
+    <!-- Bills Due -->
+    <div class="section">
+      <div class="section-head"><h3>Bills Due</h3><a data-act="utilitybills">See all</a></div>
+      <div class="bills-card">
+        <div class="bill-item">
+          <div class="bill-top"><div class="bill-ico" style="background:var(--orange-500);">💡</div><span class="bill-name">Electricity</span></div>
+          <span class="bill-status due">Due tomorrow</span>
+          <div class="bill-btn tappable" data-act="payelectricity">Pay Now</div>
+        </div>
+        <div class="bill-item">
+          <div class="bill-top"><div class="bill-ico" style="background:var(--blue-600);">🚿</div><span class="bill-name">Water</span></div>
+          <span class="bill-status due">Due in 4 days</span>
+          <div class="bill-btn tappable" data-act="paywater">Pay Now</div>
+        </div>
+        <div class="bill-item">
+          <div class="bill-top"><div class="bill-ico" style="background:var(--emerald-700);">📡</div><span class="bill-name">Internet</span></div>
+          <span class="bill-status paid">Paid</span>
+          <div class="bill-btn tappable" data-act="receiptinternet" style="background:#EAF0EE; color:var(--ink-600);">Receipt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Mini Apps -->
+    <div class="section">
+      <div class="section-head"><h3>Featured Mini Apps</h3><a data-act="explore">Explore</a></div>
+      <div class="hcarousel">
+        <div class="mini-card tappable" data-act="mini_gov"><div class="mini-ico" style="background:var(--blue-600);">🏛️</div><div class="mini-title">Government Services</div><div class="mini-sub">Tax payments, ID & permits</div></div>
+        <div class="mini-card tappable" data-act="mini_vehicle"><div class="mini-ico" style="background:var(--emerald-700);">🚗</div><div class="mini-title">Vehicle Registration</div><div class="mini-sub">Renew or register a vehicle</div></div>
+        <div class="mini-card tappable" data-act="mini_passport"><div class="mini-ico" style="background:var(--orange-500);">🛂</div><div class="mini-title">Passport Renewal</div><div class="mini-sub">Track & renew documents</div></div>
+        <div class="mini-card tappable" data-act="mini_hospital"><div class="mini-ico" style="background:var(--error);">🏥</div><div class="mini-title">Hospital Appointments</div><div class="mini-sub">Book a clinic visit</div></div>
+        <div class="mini-card tappable" data-act="mini_agri"><div class="mini-ico" style="background:var(--success);">🌾</div><div class="mini-title">Agriculture</div><div class="mini-sub">Market prices & supplies</div></div>
+      </div>
+    </div>
+
+    <!-- Daily Essentials -->
+    <div class="section">
+      <div class="section-head"><h3>Daily Essentials</h3></div>
+      <div class="grid2">
+        <div class="cat-card tappable" data-act="daily_finance"><div class="cat-top"><div class="cat-ico">💰</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Finance</div><div class="cat-sub">Loans, savings, insurance</div></div></div>
+        <div class="cat-card tappable" data-act="marketplace"><div class="cat-top"><div class="cat-ico">🛒</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Shopping</div><div class="cat-sub">Marketplace & groceries</div></div></div>
+        <div class="cat-card tappable" data-act="taxi"><div class="cat-top"><div class="cat-ico">🚌</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Transport</div><div class="cat-sub">Taxi, tricycle & transit</div></div></div>
+        <div class="cat-card tappable" data-act="pharmacy"><div class="cat-top"><div class="cat-ico">🩺</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Health</div><div class="cat-sub">Pharmacy & appointments</div></div></div>
+      </div>
+    </div>
+
+    <!-- Nearby Services -->
+    <div class="section">
+      <div class="section-head"><h3>Nearby Services</h3><a data-act="explore">Map view</a></div>
+      <div class="hcarousel">
+        <div class="nearby-card tappable" data-act="nearby_agent">
+          <div class="nearby-map"><div class="nearby-pin"><span>💵</span></div></div>
+          <div class="nearby-body">
+            <div class="nearby-name">Cash Agent — Kinaxixi</div>
+            <div class="nearby-meta"><span>350m</span><span class="open">Open</span></div>
+            <div class="nearby-btn">Directions</div>
+          </div>
+        </div>
+        <div class="nearby-card tappable" data-act="nearby_pharmacy">
+          <div class="nearby-map"><div class="nearby-pin"><span>💊</span></div></div>
+          <div class="nearby-body">
+            <div class="nearby-name">Farmácia Central</div>
+            <div class="nearby-meta"><span>620m</span><span class="open">Open</span></div>
+            <div class="nearby-btn">Directions</div>
+          </div>
+        </div>
+        <div class="nearby-card tappable" data-act="nearby_fuel">
+          <div class="nearby-map"><div class="nearby-pin"><span>⛽</span></div></div>
+          <div class="nearby-body">
+            <div class="nearby-name">Sonangol Fuel Station</div>
+            <div class="nearby-meta"><span>1.1km</span><span class="open">Open</span></div>
+            <div class="nearby-btn">Directions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promotions -->
+    <div class="section">
+      <div class="section-head"><h3>Promotions</h3></div>
+      <div class="hcarousel">
+        <div class="promo-card tappable" data-act="promo_cashback" style="background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));">
+          <div class="promo-title">20% Cashback</div><div class="promo-sub">On all bill payments this week</div>
+        </div>
+        <div class="promo-card tappable" data-act="promo_ride" style="background:linear-gradient(135deg,var(--blue-600),#173a8c);">
+          <div class="promo-title">Ride Discounts</div><div class="promo-sub">30% off your next 3 rides</div>
+        </div>
+        <div class="promo-card tappable" data-act="promo_refer" style="background:linear-gradient(135deg,var(--orange-500),#c9701f);">
+          <div class="promo-title">Refer & Earn</div><div class="promo-sub">Get AOA 2,000 per friend</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="section">
+      <div class="section-head"><h3>Recent Activity</h3><a data-act="orders">See all</a></div>
+      <div class="activity-list">
+        <div class="activity-row tappable" data-act="act_taxi">
+          <div class="act-ico">🚕</div>
+          <div class="act-mid"><div class="act-name">Taxi — Kubinga Ride</div><div class="act-date">Today, 08:12</div></div>
+          <div><div class="act-amt">− AOA 1,800</div><div class="act-status done">Completed</div></div>
+        </div>
+        <div class="activity-row tappable" data-act="act_electricity">
+          <div class="act-ico">💡</div>
+          <div class="act-mid"><div class="act-name">ENDE Electricity Bill</div><div class="act-date">Yesterday, 19:40</div></div>
+          <div><div class="act-amt">− AOA 12,400</div><div class="act-status done">Completed</div></div>
+        </div>
+        <div class="activity-row tappable" data-act="act_received">
+          <div class="act-ico">↓</div>
+          <div class="act-mid"><div class="act-name">Received from Marta S.</div><div class="act-date">Mon, 14:02</div></div>
+          <div><div class="act-amt" style="color:var(--success);">+ AOA 25,000</div><div class="act-status pending">Pending</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Hub -->
+    <div class="section">
+      <div class="section-head">
+        <h3>Business Hub</h3>
+        <div class="toggle-row">Merchant mode <div class="switch tappable" id="merchantSwitch"></div></div>
+      </div>
+      <div class="grid3">
+        <div class="grid-item tappable" data-act="biz_qr"><div class="grid-ico" style="background:var(--emerald-700);">▦</div><span>Accept QR</span></div>
+        <div class="grid-item tappable" data-act="biz_inventory"><div class="grid-ico" style="background:var(--blue-600);">📦</div><span>Inventory</span></div>
+        <div class="grid-item tappable" data-act="biz_invoices"><div class="grid-ico" style="background:var(--orange-500);">🧾</div><span>Invoices</span></div>
+        <div class="grid-item tappable" data-act="biz_pos"><div class="grid-ico" style="background:var(--emerald-500);">💳</div><span>POS</span></div>
+        <div class="grid-item tappable" data-act="biz_payroll"><div class="grid-ico" style="background:var(--ink-600);">👥</div><span>Payroll</span></div>
+        <div class="grid-item tappable" data-act="biz_analytics"><div class="grid-ico" style="background:var(--success);">📊</div><span>Analytics</span></div>
+      </div>
+    </div>
+
+    <!-- Community -->
+    <div class="section">
+      <div class="section-head"><h3>Community</h3><a data-act="explore">See all</a></div>
+      <div class="hcarousel">
+        <div class="mini-card tappable" data-act="comm_savings"><div class="mini-ico" style="background:var(--emerald-700);">🤝</div><div class="mini-title">Savings Groups</div><div class="mini-sub">Join a rotating fund</div></div>
+        <div class="mini-card tappable" data-act="comm_electrician"><div class="mini-ico" style="background:var(--orange-500);">🔌</div><div class="mini-title">Verified Electrician</div><div class="mini-sub">Book a home visit</div></div>
+        <div class="mini-card tappable" data-act="comm_plumber"><div class="mini-ico" style="background:var(--blue-600);">🔧</div><div class="mini-title">Verified Plumber</div><div class="mini-sub">Same-day availability</div></div>
+        <div class="mini-card tappable" data-act="comm_tutors"><div class="mini-ico" style="background:var(--success);">📚</div><div class="mini-title">Tutors</div><div class="mini-sub">Local & verified</div></div>
+      </div>
+    </div>
+
+    <!-- Financial Health -->
+    <div class="section">
+      <div class="section-head"><h3>Financial Health</h3></div>
+      <div class="fh-card">
+        <div class="fh-row">
+          <div class="fh-item"><span>Spending this month</span><b>AOA 84,200</b></div>
+          <div class="fh-item" style="text-align:right;"><span>Budget remaining</span><b style="color:var(--success);">AOA 65,800</b></div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:56%;background:linear-gradient(90deg,var(--emerald-500),var(--emerald-700));"></div></div>
+        <div class="fh-row" style="margin-top:14px; margin-bottom:0;">
+          <div class="fh-item"><span>Savings progress</span><b>AOA 18,500 / 30,000</b></div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:62%;background:linear-gradient(90deg,var(--orange-500),#c9701f);"></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAB -->
+  <div class="fab tappable" data-act="scan">▦</div>
+
+  <!-- Bottom Nav -->
+  <div class="bottomnav">
+    <div class="nav-item active" data-tab="home" data-act="tab_home"><div class="nav-ico">⌂</div>Home</div>
+    <div class="nav-item" data-tab="explore" data-act="explore"><div class="nav-ico">⊞</div>Explore</div>
+    <div class="nav-item" data-tab="wallet" data-act="wallet"><div class="nav-ico">👛</div>Wallet</div>
+    <div class="nav-item" data-tab="orders" data-act="orders"><div class="nav-ico">🧾</div>Orders</div>
+    <div class="nav-item" data-tab="profile" data-act="profile"><div class="nav-ico">☺</div>Profile</div>
+  </div>
+
+  <!-- SCREEN: Scan QR (camera mock) -->
+  <div class="screen cam-screen" id="scanScreen">
+    <div class="screen-header">
+      <div class="back-btn tappable close-screen">←</div>
+      <div class="screen-title">Scan to Pay</div>
+      <div class="back-btn flash-btn tappable">⚡</div>
+    </div>
+    <div class="cam-view">
+      <div class="scan-frame">
+        <span class="corner-tl"></span><span class="corner-tr"></span>
+        <span class="corner-bl"></span><span class="corner-br"></span>
+        <div class="scan-line"></div>
+        <div class="cam-hint">Align the merchant's QR code within the frame</div>
+      </div>
+    </div>
+    <div class="cam-sheet">
+      <div class="cam-sheet-row">
+        <div class="cam-sheet-title">Pay a merchant</div>
+        <div class="cam-toggle-btn tappable">My QR Code</div>
+      </div>
+      <div class="recent-chip-row">
+        <div class="recent-chip"><div class="rc-ico">🛒</div><span>Loja Kero</span></div>
+        <div class="recent-chip"><div class="rc-ico">☕</div><span>Café Sol</span></div>
+        <div class="recent-chip"><div class="rc-ico">⛽</div><span>Sonangol</span></div>
+        <div class="recent-chip"><div class="rc-ico">💊</div><span>Farmácia</span></div>
+        <div class="recent-chip"><div class="rc-ico">🍔</div><span>Chicken Spot</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: generic FORM (send, bank transfer, bills, airtime, data) -->
+  <div class="screen" id="formScreen">
+    <div class="screen-header">
+      <div class="back-btn tappable close-screen">←</div>
+      <div class="screen-title" id="formTitle">Form</div>
+    </div>
+    <div class="screen-body" id="formBody"></div>
+  </div>
+
+  <!-- SCREEN: generic LIST (taxi, food, courier, pharmacy, marketplace, explore, orders, profile) -->
+  <div class="screen" id="listScreen">
+    <div class="screen-header">
+      <div class="back-btn tappable close-screen">←</div>
+      <div class="screen-title" id="listTitle">List</div>
+    </div>
+    <div class="screen-body" id="listBody"></div>
+  </div>
+
+  <!-- SCREEN: Wallet detail -->
+  <div class="screen" id="walletScreen">
+    <div class="screen-header">
+      <div class="back-btn tappable close-screen">←</div>
+      <div class="screen-title">My Wallet</div>
+    </div>
+    <div class="screen-body">
+      <div class="wallet-section" style="padding-top:0;">
+        <div class="wallet-card">
+          <div class="wallet-top">
+            <div><div class="wallet-label">Available Balance</div><div class="wallet-balance">AOA 245,000</div></div>
+            <div class="wallet-badge">⭐ 1,240 pts</div>
+          </div>
+          <div class="wallet-sub">
+            <div><span>Cashback earned</span><b>AOA 3,150</b></div>
+            <div><span>This month</span><b>+ AOA 42,000</b></div>
+          </div>
+          <div class="quick-row">
+            <div class="qa-item tappable" data-act="scan"><div class="qa-circle">▦</div><span>Scan QR</span></div>
+            <div class="qa-item tappable" data-act="send"><div class="qa-circle">↑</div><span>Send</span></div>
+            <div class="qa-item tappable" data-act="receive"><div class="qa-circle">↓</div><span>Receive</span></div>
+            <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle">＋</div><span>Add Money</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="section"><div class="section-head"><h3>Transaction History</h3></div>
+        <div class="activity-list">
+          <div class="activity-row tappable" data-act="act_taxi"><div class="act-ico">🚕</div><div class="act-mid"><div class="act-name">Taxi — Kubinga Ride</div><div class="act-date">Today, 08:12</div></div><div><div class="act-amt">− AOA 1,800</div><div class="act-status done">Completed</div></div></div>
+          <div class="activity-row tappable" data-act="act_electricity"><div class="act-ico">💡</div><div class="act-mid"><div class="act-name">ENDE Electricity Bill</div><div class="act-date">Yesterday, 19:40</div></div><div><div class="act-amt">− AOA 12,400</div><div class="act-status done">Completed</div></div></div>
+          <div class="activity-row tappable" data-act="act_received"><div class="act-ico">↓</div><div class="act-mid"><div class="act-name">Received from Marta S.</div><div class="act-date">Mon, 14:02</div></div><div><div class="act-amt" style="color:var(--success);">+ AOA 25,000</div><div class="act-status pending">Pending</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHEET (bottom sheet modal) -->
+  <div class="sheet-overlay" id="sheetOverlay">
+    <div class="sheet" id="sheet">
+      <div class="sheet-handle"></div>
+      <div id="sheetContent"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+  function openScreen(id){ $('#'+id).classList.add('active'); }
+  function closeAllScreens(){ $$('.screen').forEach(s=>s.classList.remove('active')); }
+  function closeSheet(){ $('#sheetOverlay').classList.remove('active'); }
+  function openSheet(){ $('#sheetOverlay').classList.add('active'); }
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest('.close-screen')){ closeAllScreens(); return; }
+    if(e.target === $('#sheetOverlay')){ closeSheet(); return; }
+  });
+
+  /* ---------- FORM template ---------- */
+  function buildForm(cfg){
+    $('#formTitle').textContent = cfg.title;
+    let html = '';
+    if(cfg.chips){
+      html += `<div class="field-block"><div class="field-label">${cfg.chipsLabel}</div></div>
+      <div class="chip-row">`;
+      cfg.chips.forEach((c,i)=>{
+        html += `<div class="chip-card${i===0?' selected':''}" onclick="selectChip(this)">
+          <div class="chip-logo" style="background:${c.color}">${c.letter}</div><span>${c.label}</span></div>`;
+      });
+      html += `</div>`;
+    }
+    html += `<div class="field-block"><div class="field-label">${cfg.fieldLabel}</div>
+      <div class="text-input">${cfg.fieldPrefix||''} <span class="ph">${cfg.fieldPlaceholder}</span></div></div>`;
+    if(cfg.amounts){
+      html += `<div class="field-block"><div class="field-label">${cfg.amountsLabel||'Select amount (AOA)'}</div>
+        <div class="amount-chips">`;
+      cfg.amounts.forEach((a,i)=>{
+        html += `<div class="amount-chip${i===1?' selected':''}" onclick="selectAmount(this)">${a}</div>`;
+      });
+      html += `</div></div>`;
+    }
+    const defaultAmt = cfg.amounts ? cfg.amounts[1] : (cfg.fixedAmount||'');
+    html += `<div class="summary-card"><div><div class="lbl">${cfg.summaryLabel}</div><div class="val" style="font-size:13px;">${cfg.summaryValue}</div></div>
+      <div style="text-align:right;"><div class="lbl">Amount</div><div class="val" id="formAmt">AOA ${defaultAmt}</div></div></div>`;
+    html += `<div class="continue-btn tappable">${cfg.cta}</div>`;
+    $('#formBody').innerHTML = html;
+    openScreen('formScreen');
+  }
+  function selectChip(el){
+    el.parentElement.querySelectorAll('.chip-card').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  function selectAmount(el){
+    el.parentElement.querySelectorAll('.amount-chip').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+    const amt = document.getElementById('formAmt');
+    if(amt) amt.textContent = 'AOA ' + el.textContent.trim();
+  }
+
+  /* ---------- LIST template ---------- */
+  function buildList(cfg){
+    $('#listTitle').textContent = cfg.title;
+    let html = '';
+    if(cfg.subheader){ html += `<div class="field-block" style="padding-top:0;"><div class="field-label">${cfg.subheader}</div></div>`; }
+    html += `<div style="padding-top:14px;">`;
+    cfg.items.forEach((it,i)=>{
+      html += `<div class="list-row${i===0?' selected':''}" onclick="selectRow(this)">
+        <div class="list-ico" style="background:${it.color}">${it.icon}</div>
+        <div class="list-mid"><div class="list-name">${it.name}</div><div class="list-sub">${it.sub}</div></div>
+        <div class="list-right"><div class="list-price">${it.price}</div><div class="list-meta">${it.meta}</div></div>
+      </div>`;
+    });
+    html += `</div>`;
+    if(cfg.cta){ html += `<div class="continue-btn tappable">${cfg.cta}</div>`; }
+    $('#listBody').innerHTML = html;
+    openScreen('listScreen');
+  }
+  function selectRow(el){
+    el.parentElement.querySelectorAll('.list-row').forEach(r=>r.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  /* ---------- SHEET template ---------- */
+  function buildSheet(cfg){
+    let html = `<div class="sheet-head">
+      <div class="sheet-ico" style="background:${cfg.color}">${cfg.icon}</div>
+      <div><div class="sheet-title">${cfg.title}</div><div class="sheet-subtitle">${cfg.subtitle}</div></div>
+    </div>`;
+    if(cfg.desc){ html += `<div class="sheet-desc">${cfg.desc}</div>`; }
+    if(cfg.rows){
+      cfg.rows.forEach(r=>{ html += `<div class="sheet-row"><span class="k">${r.k}</span><span class="v">${r.v}</span></div>`; });
+    }
+    if(cfg.menu){
+      cfg.menu.forEach(m=>{ html += `<div class="sheet-menu-row"><span class="mi">${m.icon}</span><span class="mt">${m.label}</span><span>›</span></div>`; });
+    }
+    if(cfg.cta){ html += `<div class="sheet-cta tappable">${cfg.cta}</div>`; }
+    if(cfg.secondary){ html += `<div class="sheet-cta secondary tappable">${cfg.secondary}</div>`; }
+    $('#sheetContent').innerHTML = html;
+    openSheet();
+  }
+
+  /* ---------- Action registry ---------- */
+  const ACTIONS = {
+    scan: () => openScreen('scanScreen'),
+
+    send: () => buildForm({title:'Send Money', chipsLabel:'Send to', chips:[
+        {label:'Marta S.', letter:'M', color:'var(--blue-600)'},{label:'Pedro F.', letter:'P', color:'var(--emerald-700)'},{label:'Ana L.', letter:'A', color:'var(--orange-500)'}],
+      fieldLabel:'Recipient', fieldPrefix:'👤', fieldPlaceholder:'Search name or phone number',
+      amounts:[2000,5000,10000,20000], summaryLabel:'Sending to', summaryValue:'Pedro F.', cta:'Send Money'}),
+
+    banktransfer: () => buildForm({title:'Bank Transfer', chipsLabel:'Select bank', chips:[
+        {label:'BAI', letter:'B', color:'var(--emerald-700)'},{label:'BFA', letter:'F', color:'var(--blue-600)'},{label:'Standard', letter:'S', color:'var(--orange-500)'}],
+      fieldLabel:'Account number', fieldPrefix:'🏦', fieldPlaceholder:'Enter IBAN or account number',
+      amounts:[10000,25000,50000,100000], summaryLabel:'Transfer to', summaryValue:'BAI ••• 4821', cta:'Transfer'}),
+
+    utilitybills: () => buildForm({title:'Utility Bills', chipsLabel:'Select biller', chips:[
+        {label:'ENDE', letter:'E', color:'var(--orange-500)'},{label:'EPAL', letter:'W', color:'var(--blue-600)'},{label:'ZAP', letter:'Z', color:'var(--emerald-700)'}],
+      fieldLabel:'Meter / account number', fieldPrefix:'🔢', fieldPlaceholder:'Enter meter number',
+      amounts:[5000,12400,20000,30000], summaryLabel:'Paying', summaryValue:'ENDE Electricity', cta:'Pay Bill'}),
+
+    payelectricity: () => buildForm({title:'Pay Electricity', chipsLabel:'Biller', chips:[{label:'ENDE', letter:'E', color:'var(--orange-500)'}],
+      fieldLabel:'Meter number', fieldPrefix:'🔢', fieldPlaceholder:'0021 4487 992',
+      fixedAmount:'12,400', summaryLabel:'Amount due', summaryValue:'Due tomorrow', cta:'Pay AOA 12,400'}),
+
+    paywater: () => buildForm({title:'Pay Water', chipsLabel:'Biller', chips:[{label:'EPAL', letter:'W', color:'var(--blue-600)'}],
+      fieldLabel:'Account number', fieldPrefix:'🔢', fieldPlaceholder:'EP-88214-AO',
+      fixedAmount:'6,200', summaryLabel:'Amount due', summaryValue:'Due in 4 days', cta:'Pay AOA 6,200'}),
+
+    airtime: () => buildForm({title:'Buy Airtime', chipsLabel:'Select network', chips:[
+        {label:'Unitel', letter:'U', color:'var(--error)'},{label:'Movicel', letter:'M', color:'var(--blue-600)'},{label:'Africell', letter:'A', color:'var(--orange-500)'}],
+      fieldLabel:'Phone number', fieldPrefix:'🇦🇴 +244', fieldPlaceholder:'923 456 789',
+      amounts:[500,1000,2000,5000], summaryLabel:'Pay from', summaryValue:'AkiPaga Wallet', cta:'Continue'}),
+
+    mobiledata: () => buildForm({title:'Buy Mobile Data', chipsLabel:'Select network', chips:[
+        {label:'Unitel', letter:'U', color:'var(--error)'},{label:'Movicel', letter:'M', color:'var(--blue-600)'},{label:'Africell', letter:'A', color:'var(--orange-500)'}],
+      fieldLabel:'Phone number', fieldPrefix:'🇦🇴 +244', fieldPlaceholder:'923 456 789',
+      amountsLabel:'Select data bundle', amounts:['1GB','2GB','5GB','10GB'],
+      summaryLabel:'Pay from', summaryValue:'AkiPaga Wallet', cta:'Continue'}),
+
+    receive: () => buildSheet({title:'Receive Money', subtitle:'Share your code or account number', icon:'↓', color:'var(--emerald-700)',
+      desc:'Ask the sender to scan this code, or share your AkiPaga number below to receive a payment.',
+      rows:[{k:'Account name',v:'João Nzau'},{k:'AkiPaga number',v:'+244 923 456 789'}],
+      cta:'Share My QR Code', secondary:'Copy Account Number'}),
+
+    addmoney: () => buildForm({title:'Add Money', chipsLabel:'Funding source', chips:[
+        {label:'Bank', letter:'B', color:'var(--blue-600)'},{label:'Card', letter:'C', color:'var(--emerald-700)'},{label:'Cash Agent', letter:'A', color:'var(--orange-500)'}],
+      fieldLabel:'Source details', fieldPrefix:'🏦', fieldPlaceholder:'BAI account ••• 4821',
+      amounts:[10000,25000,50000,100000], summaryLabel:'Adding to', summaryValue:'AkiPaga Wallet', cta:'Add Money'}),
+
+    taxi: () => buildList({title:'Book a Ride', subheader:'From: Current location  →  To: Enter destination', items:[
+        {icon:'🏍️', color:'var(--orange-500)', name:'Moto-Taxi', sub:'1 seat · fastest through traffic', price:'AOA 800', meta:'3 min'},
+        {icon:'🚗', color:'var(--emerald-700)', name:'Standard Car', sub:'Up to 4 seats', price:'AOA 1,800', meta:'6 min'},
+        {icon:'✨', color:'var(--blue-600)', name:'Comfort', sub:'Newer cars, AC guaranteed', price:'AOA 2,600', meta:'8 min'},
+        {icon:'🚌', color:'var(--ink-600)', name:'Shared Transit', sub:'Fixed-route intercity van', price:'AOA 400', meta:'12 min'}], cta:'Confirm Ride'}),
+
+    food: () => buildList({title:'Food Delivery', subheader:'Restaurants near you', items:[
+        {icon:'🍗', color:'var(--error)', name:'Chicken Spot', sub:'Fast food · 4.6 ★', price:'AOA 3,500', meta:'25–35 min'},
+        {icon:'🍲', color:'var(--orange-500)', name:'Sabor de Angola', sub:'Local cuisine · 4.8 ★', price:'AOA 5,200', meta:'30–40 min'},
+        {icon:'🍕', color:'var(--emerald-700)', name:'Luanda Pizza Co.', sub:'Pizza & pasta · 4.5 ★', price:'AOA 4,000', meta:'20–30 min'}], cta:'View Menu'}),
+
+    courier: () => buildList({title:'Send a Package', subheader:'Choose delivery speed', items:[
+        {icon:'🏍️', color:'var(--orange-500)', name:'Same-day Moto', sub:'Small packages, under 5kg', price:'AOA 1,200', meta:'2–4 hrs'},
+        {icon:'📦', color:'var(--emerald-700)', name:'Standard Package', sub:'Up to 20kg', price:'AOA 2,800', meta:'Next day'},
+        {icon:'⚡', color:'var(--blue-600)', name:'Express', sub:'Priority handling', price:'AOA 4,500', meta:'60–90 min'}], cta:'Schedule Pickup'}),
+
+    pharmacy: () => buildList({title:'Pharmacy', subheader:'Nearby pharmacies', items:[
+        {icon:'💊', color:'var(--success)', name:'Farmácia Central', sub:'620m · Open now', price:'', meta:'Delivers'},
+        {icon:'💊', color:'var(--blue-600)', name:'Farmácia Nova Vida', sub:'890m · Open now', price:'', meta:'Delivers'},
+        {icon:'💊', color:'var(--orange-500)', name:'Farmácia São Paulo', sub:'1.4km · Closes 9pm', price:'', meta:'Pickup only'}], cta:'Order Medicine'}),
+
+    marketplace: () => buildList({title:'Marketplace', subheader:'Browse categories', items:[
+        {icon:'🛒', color:'var(--emerald-700)', name:'Groceries', sub:'Fresh produce & pantry', price:'', meta:'1.2k items'},
+        {icon:'📱', color:'var(--blue-600)', name:'Electronics', sub:'Phones, accessories', price:'', meta:'480 items'},
+        {icon:'👗', color:'var(--orange-500)', name:'Fashion', sub:'Clothing & footwear', price:'', meta:'900 items'},
+        {icon:'🏠', color:'var(--ink-600)', name:'Home & Living', sub:'Furniture, décor', price:'', meta:'350 items'}], cta:'Browse Selected Category'}),
+
+    explore: () => buildList({title:'Explore All Services', subheader:'Everything on AkiPaga', items:[
+        {icon:'🚕', color:'var(--orange-500)', name:'Mobility', sub:'Taxi, tricycle, transit', price:'', meta:''},
+        {icon:'🍔', color:'var(--error)', name:'Delivery', sub:'Food, groceries, packages', price:'', meta:''},
+        {icon:'💰', color:'var(--emerald-700)', name:'Finance', sub:'Payments, loans, insurance', price:'', meta:''},
+        {icon:'🏛️', color:'var(--blue-600)', name:'Government', sub:'Tax, ID, permits', price:'', meta:''},
+        {icon:'🤝', color:'var(--success)', name:'Community', sub:'Savings groups, local services', price:'', meta:''}]}),
+
+    orders: () => buildList({title:'My Orders', subheader:'Recent orders', items:[
+        {icon:'🍗', color:'var(--error)', name:'Chicken Spot', sub:'Food delivery · Today', price:'AOA 3,500', meta:'Delivered'},
+        {icon:'🚕', color:'var(--orange-500)', name:'Kubinga Ride', sub:'Mobility · Today', price:'AOA 1,800', meta:'Completed'},
+        {icon:'📦', color:'var(--ink-600)', name:'Package to Benguela', sub:'Courier · Yesterday', price:'AOA 2,800', meta:'In transit'}]}),
+
+    profile: () => buildList({title:'Profile', subheader:'Account', items:[
+        {icon:'👤', color:'var(--emerald-700)', name:'Account Details', sub:'João M. · +244 923 456 789', price:'', meta:''},
+        {icon:'🔒', color:'var(--blue-600)', name:'Security & PIN', sub:'Manage login & PIN', price:'', meta:''},
+        {icon:'🌍', color:'var(--orange-500)', name:'Language', sub:'Português / English / Français / 中文', price:'', meta:''},
+        {icon:'💬', color:'var(--success)', name:'Help & Support', sub:'Chat with us', price:'', meta:''}]}),
+
+    wallet: () => openScreen('walletScreen'),
+
+    notifications: () => buildSheet({title:'Notifications', subtitle:'3 new updates', icon:'🔔', color:'var(--emerald-700)',
+      menu:[{icon:'💰',label:'You received AOA 25,000 from Marta S.'},{icon:'💡',label:'Electricity bill due tomorrow'},{icon:'🎁',label:'20% cashback offer just for you'}]}),
+
+    search: () => buildSheet({title:'Search', subtitle:'Try a service, merchant or bill', icon:'🔍', color:'var(--blue-600)',
+      menu:[{icon:'🚕',label:'Taxi'},{icon:'💡',label:'Electricity Bill'},{icon:'📶',label:'Airtime'},{icon:'🛍️',label:'Marketplace'}]}),
+
+    receiptinternet: () => buildSheet({title:'Internet Bill', subtitle:'ZAP Fibra · Paid', icon:'📡', color:'var(--emerald-700)',
+      rows:[{k:'Amount',v:'AOA 18,000'},{k:'Date',v:'26 Jul 2026'},{k:'Reference',v:'ZP-88231'},{k:'Status',v:'Paid'}],
+      cta:'Download Receipt'}),
+
+    mini_gov: () => buildSheet({title:'Government Services', subtitle:'Tax, ID & permits', icon:'🏛️', color:'var(--blue-600)',
+      desc:'Pay taxes, request ID documents, and manage government permits, all in one place.', cta:'Open Mini App'}),
+    mini_vehicle: () => buildSheet({title:'Vehicle Registration', subtitle:'Renew or register a vehicle', icon:'🚗', color:'var(--emerald-700)',
+      desc:'Register a new vehicle or renew existing documents without visiting an office.', cta:'Start Registration'}),
+    mini_passport: () => buildSheet({title:'Passport Renewal', subtitle:'Track & renew documents', icon:'🛂', color:'var(--orange-500)',
+      desc:'Check your passport application status or start a renewal request.', cta:'Check Status'}),
+    mini_hospital: () => buildSheet({title:'Hospital Appointments', subtitle:'Book a clinic visit', icon:'🏥', color:'var(--error)',
+      desc:'Find nearby clinics and book an appointment with a doctor.', cta:'Find a Clinic'}),
+    mini_agri: () => buildSheet({title:'Agriculture', subtitle:'Market prices & supplies', icon:'🌾', color:'var(--success)',
+      desc:'Check live crop prices and order farming supplies for delivery.', cta:'View Market Prices'}),
+
+    daily_finance: () => buildSheet({title:'Finance', subtitle:'Loans, savings, insurance', icon:'💰', color:'var(--emerald-700)',
+      menu:[{icon:'💳',label:'Micro Loans'},{icon:'🏦',label:'Savings'},{icon:'🛡️',label:'Insurance (via Proteja)'}]}),
+
+    nearby_agent: () => buildSheet({title:'Cash Agent — Kinaxixi', subtitle:'350m away · Open now', icon:'💵', color:'var(--emerald-700)',
+      rows:[{k:'Hours',v:'8:00 – 19:00'},{k:'Services',v:'Cash in / Cash out'},{k:'Phone',v:'+244 912 000 111'}],
+      cta:'Get Directions', secondary:'Call Agent'}),
+    nearby_pharmacy: () => buildSheet({title:'Farmácia Central', subtitle:'620m away · Open now', icon:'💊', color:'var(--success)',
+      rows:[{k:'Hours',v:'7:00 – 22:00'},{k:'Delivery',v:'Available'},{k:'Phone',v:'+244 912 222 333'}],
+      cta:'Get Directions', secondary:'Order Medicine'}),
+    nearby_fuel: () => buildSheet({title:'Sonangol Fuel Station', subtitle:'1.1km away · Open now', icon:'⛽', color:'var(--orange-500)',
+      rows:[{k:'Hours',v:'24 hours'},{k:'Payment',v:'QR & Card accepted'}],
+      cta:'Get Directions'}),
+
+    promo_cashback: () => buildSheet({title:'20% Cashback', subtitle:'On all bill payments this week', icon:'🎁', color:'var(--emerald-700)',
+      desc:'Pay any utility bill through AkiPaga this week and get 20% back into your wallet, up to AOA 5,000.', cta:'Claim Offer'}),
+    promo_ride: () => buildSheet({title:'Ride Discounts', subtitle:'30% off your next 3 rides', icon:'🚕', color:'var(--blue-600)',
+      desc:'Book any ride through the app and the discount is applied automatically at checkout.', cta:'Book a Ride'}),
+    promo_refer: () => buildSheet({title:'Refer & Earn', subtitle:'Get AOA 2,000 per friend', icon:'🤝', color:'var(--orange-500)',
+      desc:'Share your invite code. When a friend signs up and completes their first payment, you both earn AOA 2,000.', cta:'Share Invite Code'}),
+
+    act_taxi: () => buildSheet({title:'Taxi — Kubinga Ride', subtitle:'Today, 08:12 · Completed', icon:'🚕', color:'var(--orange-500)',
+      rows:[{k:'Amount',v:'AOA 1,800'},{k:'Route',v:'Maianga → Talatona'},{k:'Payment',v:'AkiPaga Wallet'}], cta:'Book Again', secondary:'Share Receipt'}),
+    act_electricity: () => buildSheet({title:'ENDE Electricity Bill', subtitle:'Yesterday, 19:40 · Completed', icon:'💡', color:'var(--orange-500)',
+      rows:[{k:'Amount',v:'AOA 12,400'},{k:'Meter',v:'0021 4487 992'},{k:'Reference',v:'END-77213'}], cta:'Download Receipt'}),
+    act_received: () => buildSheet({title:'Received from Marta S.', subtitle:'Monday, 14:02 · Pending', icon:'↓', color:'var(--success)',
+      rows:[{k:'Amount',v:'AOA 25,000'},{k:'Status',v:'Pending confirmation'}], cta:'View Details'}),
+
+    biz_qr: () => buildSheet({title:'Accept QR Payments', subtitle:'Merchant tools', icon:'▦', color:'var(--emerald-700)',
+      desc:'Generate a payment QR code for your store and get notified instantly when a customer pays.', cta:'Open Module'}),
+    biz_inventory: () => buildSheet({title:'Inventory', subtitle:'Merchant tools', icon:'📦', color:'var(--blue-600)',
+      desc:'Track stock levels across your products and get low-stock alerts.', cta:'Open Module'}),
+    biz_invoices: () => buildSheet({title:'Invoices', subtitle:'Merchant tools', icon:'🧾', color:'var(--orange-500)',
+      desc:'Create and send invoices to customers, and track which ones are paid.', cta:'Open Module'}),
+    biz_pos: () => buildSheet({title:'POS', subtitle:'Merchant tools', icon:'💳', color:'var(--emerald-500)',
+      desc:'Turn your phone into a point-of-sale terminal for in-person payments.', cta:'Open Module'}),
+    biz_payroll: () => buildSheet({title:'Employee Payroll', subtitle:'Merchant tools', icon:'👥', color:'var(--ink-600)',
+      desc:'Pay staff directly into their AkiPaga wallets on a schedule you set.', cta:'Open Module'}),
+    biz_analytics: () => buildSheet({title:'Business Analytics', subtitle:'Merchant tools', icon:'📊', color:'var(--success)',
+      desc:'See sales trends, best-selling items, and customer insights at a glance.', cta:'Open Module'}),
+
+    comm_savings: () => buildSheet({title:'Savings Groups', subtitle:'Join a rotating fund', icon:'🤝', color:'var(--emerald-700)',
+      desc:'Join a trusted community savings circle (kixikila-style) and contribute on a shared schedule.', cta:'Join a Group'}),
+    comm_electrician: () => buildSheet({title:'Verified Electrician', subtitle:'Book a home visit', icon:'🔌', color:'var(--orange-500)',
+      rows:[{k:'Rating',v:'4.7 ★ (128 jobs)'},{k:'Availability',v:'Today, from 2pm'}], cta:'Book Now'}),
+    comm_plumber: () => buildSheet({title:'Verified Plumber', subtitle:'Same-day availability', icon:'🔧', color:'var(--blue-600)',
+      rows:[{k:'Rating',v:'4.6 ★ (94 jobs)'},{k:'Availability',v:'Today, from 4pm'}], cta:'Book Now'}),
+    comm_tutors: () => buildSheet({title:'Tutors', subtitle:'Local & verified', icon:'📚', color:'var(--success)',
+      rows:[{k:'Subjects',v:'Math, Portuguese, English'},{k:'Rating',v:'4.8 ★ (210 sessions)'}], cta:'Find a Tutor'}),
+  };
+
+  document.addEventListener('click', function(e){
+    const el = e.target.closest('[data-act]');
+    if(!el) return;
+    const key = el.getAttribute('data-act');
+
+    if(key === 'tab_home'){
+      closeAllScreens(); closeSheet();
+      $$('.nav-item').forEach(n=>n.classList.remove('active'));
+      el.classList.add('active');
+      return;
+    }
+    if(ACTIONS[key]){
+      $$('.nav-item').forEach(n=>n.classList.remove('active'));
+      const tab = el.closest('.nav-item');
+      if(tab) tab.classList.add('active');
+      ACTIONS[key]();
+    }
+  });
+
+  /* Merchant mode switch (visual only) */
+  document.getElementById('merchantSwitch').addEventListener('click', function(){
+    this.classList.toggle('tappable');
+  });
+</script>
+
+</body>
+</html>
