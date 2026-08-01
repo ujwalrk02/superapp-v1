@@ -420,18 +420,18 @@
   ::selection{background:var(--emerald-500); color:#fff;}
 
   /* Clickable affordance */
-  .tappable{cursor:pointer; transition:transform .12s ease, opacity .12s ease;}
-  .tappable:active{transform:scale(0.94); opacity:0.85;}
+  .tappable{cursor:pointer; transition:none !important; transform:none !important;}
+  .tappable:active{transform:none !important; opacity:1 !important;}
 
   /* ===== Slide-in full screens ===== */
   .screen{
     position:absolute; inset:0; z-index:60;
     background:var(--bg);
     transform:translateX(100%);
-    transition:transform .36s cubic-bezier(.22,.9,.32,1);
+    transition:none !important;
     display:flex; flex-direction:column;
   }
-  .screen.active{transform:translateX(0);}
+  .screen.active{transform:translateX(0); transition:none !important;}
   .screen-header{
     display:flex; align-items:center; gap:12px;
     padding:18px 18px 14px;
@@ -539,14 +539,14 @@
   /* ===== Bottom sheet ===== */
   .sheet-overlay{
     position:absolute; inset:0; z-index:70; background:rgba(6,18,14,0.45);
-    opacity:0; pointer-events:none; transition:opacity .3s ease;
+    opacity:0; pointer-events:none; transition:none !important;
   }
   .sheet-overlay.active{opacity:1; pointer-events:auto;}
   .sheet{
     position:absolute; left:0; right:0; bottom:0;
     background:var(--card); border-radius:26px 26px 0 0;
     padding:10px 22px 28px;
-    transform:translateY(100%); transition:transform .34s cubic-bezier(.22,.9,.32,1);
+    transform:translateY(100%); transition:none !important;
     max-height:78%; overflow-y:auto; scrollbar-width:none;
   }
   .sheet::-webkit-scrollbar{display:none;}
