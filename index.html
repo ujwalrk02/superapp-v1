@@ -60,7 +60,6 @@
       overflow: hidden;
     }
     .scroll { padding-bottom: 100px; }
-    .statusbar { display: none; }
     .bottomnav {
       position: fixed !important;
       bottom: 0; left: 0; right: 0;
@@ -83,6 +82,7 @@
       margin: 0 auto;
       box-shadow: none;
     }
+    .scroll { padding-bottom: 100px; }
   }
 
   .scroll{
@@ -93,19 +93,10 @@
   }
   .scroll::-webkit-scrollbar{display:none;}
 
-  /* Status bar */
-  .statusbar{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:16px 26px 6px;
-    font-size:14px; font-weight:700;
-    color:var(--ink-900);
-  }
-  .statusbar .icons{display:flex; gap:6px; align-items:center; font-size:12px; color:var(--ink-900);}
-
   /* Header */
   .header{
     display:flex; justify-content:space-between; align-items:center;
-    padding:8px 20px 4px;
+    padding:22px 20px 4px;
   }
   .greet-block{display:flex; gap:10px; align-items:center;}
   .avatar{
@@ -348,7 +339,7 @@
 
   /* Bottom nav */
   .bottomnav{
-    position:absolute; bottom:0; left:0; right:0; z-index:40;
+    position:absolute; bottom:0; left:0; right:0; z-index:65;
     background:rgba(255,255,255,0.94);
     backdrop-filter:blur(14px);
     border-top:1px solid var(--line);
@@ -394,7 +385,7 @@
     box-shadow:0 2px 6px rgba(14,31,26,0.06); flex-shrink:0; cursor:pointer;
   }
   .screen-title{font-family:'Manrope'; font-weight:800; font-size:16px; flex:1;}
-  .screen-body{flex:1; overflow-y:auto; scrollbar-width:none; padding-bottom:30px;}
+  .screen-body{flex:1; overflow-y:auto; scrollbar-width:none; padding-bottom:110px;}
   .screen-body::-webkit-scrollbar{display:none;}
 
   /* Scan QR screen (camera mock) */
@@ -528,8 +519,22 @@
     display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); cursor:pointer;
   }
   .sheet-menu-row:last-child{border-bottom:none;}
-  .sheet-menu-row .mi{font-size:17px; width:26px; text-align:center;}
+  .sheet-menu-row .mi{font-size:17px; width:26px; text-align:center; color:var(--ink-600); display:flex; align-items:center; justify-content:center;}
   .sheet-menu-row .mt{font-size:13px; font-weight:600; flex:1;}
+  .sheet-menu-row .mc{color:var(--ink-400); width:16px; height:16px; flex-shrink:0;}
+
+  /* ===== Icon system (Lucide) ===== */
+  .ico{
+    width:1em; height:1em; display:inline-flex; align-items:center; justify-content:center;
+    flex-shrink:0; line-height:0;
+  }
+  .ico svg{width:100%; height:100%; display:block;}
+  .icon-btn{color:var(--ink-700, var(--ink-900));}
+  .back-btn{color:var(--ink-900);}
+  .search-bar .ico{color:var(--ink-400); font-size:17px;}
+  .cat-ico{color:var(--emerald-700);}
+  .act-ico{color:var(--ink-600);}
+  .star-ico{color:var(--warning); width:11px; height:11px; display:inline-block; vertical-align:-1px;}
 </style>
 </head>
 <body>
@@ -537,33 +542,27 @@
 <div class="device" id="device">
   <div class="scroll">
 
-    <!-- Status bar -->
-    <div class="statusbar">
-      <span>9:41</span>
-      <div class="icons"><span>••••</span><span>Wi-Fi</span><span>🔋</span></div>
-    </div>
-
     <!-- Header -->
     <div class="header">
       <div class="greet-block">
         <div class="avatar">J</div>
         <div class="greet-text">
           <div class="hi">Hi, João Nzau</div>
-          <div class="loc">📍 Luanda, Angola</div>
+          <div class="loc"><i class="ico" data-icon="mappin" style="font-size:11px;"></i> Luanda, Angola</div>
         </div>
       </div>
       <div class="header-actions">
         <div class="lang-toggle">PT / EN / FR / 中文</div>
-        <div class="icon-btn tappable" data-act="notifications">🔔<span class="dot"></span></div>
+        <div class="icon-btn tappable" data-act="notifications"><i class="ico" data-icon="bell"></i><span class="dot"></span></div>
       </div>
     </div>
 
     <!-- Search -->
     <div class="search-wrap">
       <div class="search-bar tappable" data-act="search">
-        <span>🔍</span>
+        <span class="ico" data-icon="search"></span>
         <input placeholder="Search services, merchants or bills" readonly>
-        <div class="mic">🎙</div>
+        <div class="mic"><i class="ico" data-icon="mic"></i></div>
       </div>
     </div>
 
@@ -575,125 +574,72 @@
             <div class="wallet-label">Wallet Balance</div>
             <div class="wallet-balance">AOA 245,000</div>
           </div>
-          <div class="wallet-badge">⭐ 1,240 pts</div>
+          <div class="wallet-badge"><i class="ico star-ico" data-icon="star"></i> 1,240 pts</div>
         </div>
         <div class="wallet-sub">
           <div><span>Cashback earned</span><b>AOA 3,150</b></div>
           <div><span>This month</span><b>+ AOA 42,000</b></div>
         </div>
         <div class="quick-row">
-          <div class="qa-item tappable" data-act="scan"><div class="qa-circle">▦</div><span>Scan QR</span></div>
-          <div class="qa-item tappable" data-act="send"><div class="qa-circle">↑</div><span>Send</span></div>
-          <div class="qa-item tappable" data-act="receive"><div class="qa-circle">↓</div><span>Receive</span></div>
-          <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle">＋</div><span>Add Money</span></div>
+          <div class="qa-item tappable" data-act="send"><div class="qa-circle"><i class="ico" data-icon="arrowupright"></i></div><span>Send</span></div>
+          <div class="qa-item tappable" data-act="receive"><div class="qa-circle"><i class="ico" data-icon="receive"></i></div><span>Receive</span></div>
+          <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle"><i class="ico" data-icon="plus"></i></div><span>Add Money</span></div>
+          <div class="qa-item tappable" data-act="withdraw"><div class="qa-circle"><i class="ico" data-icon="withdraw"></i></div><span>Withdraw</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Quick Actions Grid -->
+    <!-- Transfers -->
     <div class="section">
-      <div class="section-head"><h3>Quick Actions</h3><a data-act="explore">View more</a></div>
-      <div class="grid3">
-        <div class="grid-item tappable" data-act="scan"><div class="grid-ico" style="background:var(--emerald-700);">▦</div><span>Scan QR</span></div>
-        <div class="grid-item tappable" data-act="send"><div class="grid-ico" style="background:var(--blue-600);">↑</div><span>Send Money</span></div>
-        <div class="grid-item tappable" data-act="banktransfer"><div class="grid-ico" style="background:var(--emerald-500);">🏦</div><span>Bank Transfer</span></div>
-        <div class="grid-item tappable" data-act="utilitybills"><div class="grid-ico" style="background:var(--orange-500);">💡</div><span>Utility Bills</span></div>
-        <div class="grid-item tappable" data-act="airtime"><div class="grid-ico" style="background:var(--blue-600);">📶</div><span>Airtime</span></div>
-        <div class="grid-item tappable" data-act="mobiledata"><div class="grid-ico" style="background:var(--emerald-700);">📡</div><span>Mobile Data</span></div>
-        <div class="grid-item tappable" data-act="taxi"><div class="grid-ico" style="background:var(--orange-500);">🚕</div><span>Taxi</span></div>
-        <div class="grid-item tappable" data-act="food"><div class="grid-ico" style="background:var(--error);">🍔</div><span>Food Delivery</span></div>
-        <div class="grid-item tappable" data-act="courier"><div class="grid-ico" style="background:var(--ink-600);">📦</div><span>Courier</span></div>
-        <div class="grid-item tappable" data-act="pharmacy"><div class="grid-ico" style="background:var(--success);">💊</div><span>Pharmacy</span></div>
-        <div class="grid-item tappable" data-act="marketplace"><div class="grid-ico" style="background:var(--blue-600);">🛍️</div><span>Marketplace</span></div>
-        <div class="grid-item tappable" data-act="explore"><div class="grid-ico" style="background:var(--ink-400);">⋯</div><span>View More</span></div>
-      </div>
-    </div>
-
-    <!-- Bills Due -->
-    <div class="section">
-      <div class="section-head"><h3>Bills Due</h3><a data-act="utilitybills">See all</a></div>
-      <div class="bills-card">
-        <div class="bill-item">
-          <div class="bill-top"><div class="bill-ico" style="background:var(--orange-500);">💡</div><span class="bill-name">Electricity</span></div>
-          <span class="bill-status due">Due tomorrow</span>
-          <div class="bill-btn tappable" data-act="payelectricity">Pay Now</div>
-        </div>
-        <div class="bill-item">
-          <div class="bill-top"><div class="bill-ico" style="background:var(--blue-600);">🚿</div><span class="bill-name">Water</span></div>
-          <span class="bill-status due">Due in 4 days</span>
-          <div class="bill-btn tappable" data-act="paywater">Pay Now</div>
-        </div>
-        <div class="bill-item">
-          <div class="bill-top"><div class="bill-ico" style="background:var(--emerald-700);">📡</div><span class="bill-name">Internet</span></div>
-          <span class="bill-status paid">Paid</span>
-          <div class="bill-btn tappable" data-act="receiptinternet" style="background:#EAF0EE; color:var(--ink-600);">Receipt</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Featured Mini Apps -->
-    <div class="section">
-      <div class="section-head"><h3>Featured Mini Apps</h3><a data-act="explore">Explore</a></div>
-      <div class="hcarousel">
-        <div class="mini-card tappable" data-act="mini_gov"><div class="mini-ico" style="background:var(--blue-600);">🏛️</div><div class="mini-title">Government Services</div><div class="mini-sub">Tax payments, ID & permits</div></div>
-        <div class="mini-card tappable" data-act="mini_vehicle"><div class="mini-ico" style="background:var(--emerald-700);">🚗</div><div class="mini-title">Vehicle Registration</div><div class="mini-sub">Renew or register a vehicle</div></div>
-        <div class="mini-card tappable" data-act="mini_passport"><div class="mini-ico" style="background:var(--orange-500);">🛂</div><div class="mini-title">Passport Renewal</div><div class="mini-sub">Track & renew documents</div></div>
-        <div class="mini-card tappable" data-act="mini_hospital"><div class="mini-ico" style="background:var(--error);">🏥</div><div class="mini-title">Hospital Appointments</div><div class="mini-sub">Book a clinic visit</div></div>
-        <div class="mini-card tappable" data-act="mini_agri"><div class="mini-ico" style="background:var(--success);">🌾</div><div class="mini-title">Agriculture</div><div class="mini-sub">Market prices & supplies</div></div>
-      </div>
-    </div>
-
-    <!-- Daily Essentials -->
-    <div class="section">
-      <div class="section-head"><h3>Daily Essentials</h3></div>
+      <div class="section-head"><h3>Transfers</h3></div>
       <div class="grid2">
-        <div class="cat-card tappable" data-act="daily_finance"><div class="cat-top"><div class="cat-ico">💰</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Finance</div><div class="cat-sub">Loans, savings, insurance</div></div></div>
-        <div class="cat-card tappable" data-act="marketplace"><div class="cat-top"><div class="cat-ico">🛒</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Shopping</div><div class="cat-sub">Marketplace & groceries</div></div></div>
-        <div class="cat-card tappable" data-act="taxi"><div class="cat-top"><div class="cat-ico">🚌</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Transport</div><div class="cat-sub">Taxi, tricycle & transit</div></div></div>
-        <div class="cat-card tappable" data-act="pharmacy"><div class="cat-top"><div class="cat-ico">🩺</div><div class="cat-arrow">→</div></div><div><div class="cat-name">Health</div><div class="cat-sub">Pharmacy & appointments</div></div></div>
+        <div class="cat-card tappable" data-act="send"><div class="cat-top"><div class="cat-ico"><i class="ico" data-icon="arrowupright"></i></div><div class="cat-arrow"><i class="ico" data-icon="chevronright"></i></div></div><div><div class="cat-name">Send Money</div><div class="cat-sub">To AkiPaga users or others</div></div></div>
+        <div class="cat-card tappable" data-act="remittance"><div class="cat-top"><div class="cat-ico"><i class="ico" data-icon="globe"></i></div><div class="cat-arrow"><i class="ico" data-icon="chevronright"></i></div></div><div><div class="cat-name">Send Abroad</div><div class="cat-sub">30+ countries, wallet or bank</div></div></div>
       </div>
     </div>
 
-    <!-- Nearby Services -->
+    <!-- Pay for Services -->
     <div class="section">
-      <div class="section-head"><h3>Nearby Services</h3><a data-act="explore">Map view</a></div>
-      <div class="hcarousel">
-        <div class="nearby-card tappable" data-act="nearby_agent">
-          <div class="nearby-map"><div class="nearby-pin"><span>💵</span></div></div>
-          <div class="nearby-body">
-            <div class="nearby-name">Cash Agent — Kinaxixi</div>
-            <div class="nearby-meta"><span>350m</span><span class="open">Open</span></div>
-            <div class="nearby-btn">Directions</div>
-          </div>
-        </div>
-        <div class="nearby-card tappable" data-act="nearby_pharmacy">
-          <div class="nearby-map"><div class="nearby-pin"><span>💊</span></div></div>
-          <div class="nearby-body">
-            <div class="nearby-name">Farmácia Central</div>
-            <div class="nearby-meta"><span>620m</span><span class="open">Open</span></div>
-            <div class="nearby-btn">Directions</div>
-          </div>
-        </div>
-        <div class="nearby-card tappable" data-act="nearby_fuel">
-          <div class="nearby-map"><div class="nearby-pin"><span>⛽</span></div></div>
-          <div class="nearby-body">
-            <div class="nearby-name">Sonangol Fuel Station</div>
-            <div class="nearby-meta"><span>1.1km</span><span class="open">Open</span></div>
-            <div class="nearby-btn">Directions</div>
-          </div>
-        </div>
+      <div class="section-head"><h3>Pay for Services</h3></div>
+      <div class="grid3">
+        <div class="grid-item tappable" data-act="epal"><div class="grid-ico" style="background:var(--blue-600);"><i class="ico" data-icon="droplet"></i></div><span>EPAL Water</span></div>
+        <div class="grid-item tappable" data-act="zap"><div class="grid-ico" style="background:var(--emerald-700);"><i class="ico" data-icon="radio"></i></div><span>ZAP</span></div>
+        <div class="grid-item tappable" data-act="nossaseguros"><div class="grid-ico" style="background:var(--orange-500);"><i class="ico" data-icon="shield"></i></div><span>Nossa Seguros</span></div>
+        <div class="grid-item tappable" data-act="sanlam"><div class="grid-ico" style="background:var(--error);"><i class="ico" data-icon="heartpulse"></i></div><span>Sanlam Vida</span></div>
+        <div class="grid-item tappable" data-act="unitel"><div class="grid-ico" style="background:var(--emerald-500);"><i class="ico" data-icon="smartphone"></i></div><span>Unitel Recarga</span></div>
+        <div class="grid-item tappable" data-act="zulubet"><div class="grid-ico" style="background:var(--ink-600);"><i class="ico" data-icon="trophy"></i></div><span>Zulubet</span></div>
       </div>
     </div>
 
-    <!-- Promotions -->
+    <!-- On-demand Delivery -->
     <div class="section">
-      <div class="section-head"><h3>Promotions</h3></div>
+      <div class="section-head"><h3>On-demand Delivery</h3></div>
+      <div class="grid3">
+        <div class="grid-item tappable" data-act="food"><div class="grid-ico" style="background:var(--error);"><i class="ico" data-icon="utensils"></i></div><span>Food</span></div>
+        <div class="grid-item tappable" data-act="groceries"><div class="grid-ico" style="background:var(--emerald-700);"><i class="ico" data-icon="cart"></i></div><span>Groceries</span></div>
+        <div class="grid-item tappable" data-act="pharma"><div class="grid-ico" style="background:var(--success);"><i class="ico" data-icon="pill"></i></div><span>Pharma</span></div>
+      </div>
+    </div>
+
+    <!-- On-demand Mobility -->
+    <div class="section">
+      <div class="section-head"><h3>On-demand Mobility</h3></div>
+      <div class="grid3">
+        <div class="grid-item tappable" data-act="moto"><div class="grid-ico" style="background:var(--orange-500);"><i class="ico" data-icon="motorbike"></i></div><span>Moto-Taxi</span></div>
+        <div class="grid-item tappable" data-act="transit"><div class="grid-ico" style="background:var(--blue-600);"><i class="ico" data-icon="bus"></i></div><span>Transit</span></div>
+        <div class="grid-item tappable" data-act="courier"><div class="grid-ico" style="background:var(--ink-600);"><i class="ico" data-icon="package"></i></div><span>Courier</span></div>
+      </div>
+    </div>
+
+    <!-- Offers & Rewards -->
+    <div class="section">
+      <div class="section-head"><h3>Offers & Rewards</h3></div>
       <div class="hcarousel">
         <div class="promo-card tappable" data-act="promo_cashback" style="background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));">
           <div class="promo-title">20% Cashback</div><div class="promo-sub">On all bill payments this week</div>
         </div>
-        <div class="promo-card tappable" data-act="promo_ride" style="background:linear-gradient(135deg,var(--blue-600),#173a8c);">
-          <div class="promo-title">Ride Discounts</div><div class="promo-sub">30% off your next 3 rides</div>
+        <div class="promo-card tappable" data-act="promo_remit" style="background:linear-gradient(135deg,var(--blue-600),#173a8c);">
+          <div class="promo-title">Remittance Discount</div><div class="promo-sub">Reduced fees on transfers abroad</div>
         </div>
         <div class="promo-card tappable" data-act="promo_refer" style="background:linear-gradient(135deg,var(--orange-500),#c9701f);">
           <div class="promo-title">Refer & Earn</div><div class="promo-sub">Get AOA 2,000 per friend</div>
@@ -705,124 +651,50 @@
     <div class="section">
       <div class="section-head"><h3>Recent Activity</h3><a data-act="orders">See all</a></div>
       <div class="activity-list">
-        <div class="activity-row tappable" data-act="act_taxi">
-          <div class="act-ico">🚕</div>
-          <div class="act-mid"><div class="act-name">Taxi — Kubinga Ride</div><div class="act-date">Today, 08:12</div></div>
-          <div><div class="act-amt">− AOA 1,800</div><div class="act-status done">Completed</div></div>
+        <div class="activity-row tappable" data-act="act_ride">
+          <div class="act-ico"><i class="ico" data-icon="motorbike"></i></div>
+          <div class="act-mid"><div class="act-name">Moto-Taxi Ride</div><div class="act-date">Today, 08:12</div></div>
+          <div><div class="act-amt">− AOA 800</div><div class="act-status done">Completed</div></div>
         </div>
         <div class="activity-row tappable" data-act="act_electricity">
-          <div class="act-ico">💡</div>
+          <div class="act-ico"><i class="ico" data-icon="zap"></i></div>
           <div class="act-mid"><div class="act-name">ENDE Electricity Bill</div><div class="act-date">Yesterday, 19:40</div></div>
           <div><div class="act-amt">− AOA 12,400</div><div class="act-status done">Completed</div></div>
         </div>
         <div class="activity-row tappable" data-act="act_received">
-          <div class="act-ico">↓</div>
+          <div class="act-ico"><i class="ico" data-icon="receive"></i></div>
           <div class="act-mid"><div class="act-name">Received from Marta S.</div><div class="act-date">Mon, 14:02</div></div>
           <div><div class="act-amt" style="color:var(--success);">+ AOA 25,000</div><div class="act-status pending">Pending</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Business Hub -->
-    <div class="section">
-      <div class="section-head">
-        <h3>Business Hub</h3>
-        <div class="toggle-row">Merchant mode <div class="switch tappable" id="merchantSwitch"></div></div>
-      </div>
-      <div class="grid3">
-        <div class="grid-item tappable" data-act="biz_qr"><div class="grid-ico" style="background:var(--emerald-700);">▦</div><span>Accept QR</span></div>
-        <div class="grid-item tappable" data-act="biz_inventory"><div class="grid-ico" style="background:var(--blue-600);">📦</div><span>Inventory</span></div>
-        <div class="grid-item tappable" data-act="biz_invoices"><div class="grid-ico" style="background:var(--orange-500);">🧾</div><span>Invoices</span></div>
-        <div class="grid-item tappable" data-act="biz_pos"><div class="grid-ico" style="background:var(--emerald-500);">💳</div><span>POS</span></div>
-        <div class="grid-item tappable" data-act="biz_payroll"><div class="grid-ico" style="background:var(--ink-600);">👥</div><span>Payroll</span></div>
-        <div class="grid-item tappable" data-act="biz_analytics"><div class="grid-ico" style="background:var(--success);">📊</div><span>Analytics</span></div>
-      </div>
-    </div>
-
-    <!-- Community -->
-    <div class="section">
-      <div class="section-head"><h3>Community</h3><a data-act="explore">See all</a></div>
-      <div class="hcarousel">
-        <div class="mini-card tappable" data-act="comm_savings"><div class="mini-ico" style="background:var(--emerald-700);">🤝</div><div class="mini-title">Savings Groups</div><div class="mini-sub">Join a rotating fund</div></div>
-        <div class="mini-card tappable" data-act="comm_electrician"><div class="mini-ico" style="background:var(--orange-500);">🔌</div><div class="mini-title">Verified Electrician</div><div class="mini-sub">Book a home visit</div></div>
-        <div class="mini-card tappable" data-act="comm_plumber"><div class="mini-ico" style="background:var(--blue-600);">🔧</div><div class="mini-title">Verified Plumber</div><div class="mini-sub">Same-day availability</div></div>
-        <div class="mini-card tappable" data-act="comm_tutors"><div class="mini-ico" style="background:var(--success);">📚</div><div class="mini-title">Tutors</div><div class="mini-sub">Local & verified</div></div>
-      </div>
-    </div>
-
-    <!-- Financial Health -->
-    <div class="section">
-      <div class="section-head"><h3>Financial Health</h3></div>
-      <div class="fh-card">
-        <div class="fh-row">
-          <div class="fh-item"><span>Spending this month</span><b>AOA 84,200</b></div>
-          <div class="fh-item" style="text-align:right;"><span>Budget remaining</span><b style="color:var(--success);">AOA 65,800</b></div>
-        </div>
-        <div class="bar-track"><div class="bar-fill" style="width:56%;background:linear-gradient(90deg,var(--emerald-500),var(--emerald-700));"></div></div>
-        <div class="fh-row" style="margin-top:14px; margin-bottom:0;">
-          <div class="fh-item"><span>Savings progress</span><b>AOA 18,500 / 30,000</b></div>
-        </div>
-        <div class="bar-track"><div class="bar-fill" style="width:62%;background:linear-gradient(90deg,var(--orange-500),#c9701f);"></div></div>
-      </div>
-    </div>
-
   </div>
 
   <!-- FAB -->
-  <div class="fab tappable" data-act="scan">▦</div>
+  <div class="fab tappable" data-act="send"><i class="ico" data-icon="arrowupright"></i></div>
 
   <!-- Bottom Nav -->
   <div class="bottomnav">
-    <div class="nav-item active" data-tab="home" data-act="tab_home"><div class="nav-ico">⌂</div>Home</div>
-    <div class="nav-item" data-tab="explore" data-act="explore"><div class="nav-ico">⊞</div>Explore</div>
-    <div class="nav-item" data-tab="wallet" data-act="wallet"><div class="nav-ico">👛</div>Wallet</div>
-    <div class="nav-item" data-tab="orders" data-act="orders"><div class="nav-ico">🧾</div>Orders</div>
-    <div class="nav-item" data-tab="profile" data-act="profile"><div class="nav-ico">☺</div>Profile</div>
+    <div class="nav-item active" data-tab="home" data-act="tab_home"><div class="nav-ico"><i class="ico" data-icon="home"></i></div>Home</div>
+    <div class="nav-item" data-tab="wallet" data-act="wallet"><div class="nav-ico"><i class="ico" data-icon="wallet"></i></div>Wallet</div>
+    <div class="nav-item" data-tab="orders" data-act="orders"><div class="nav-ico"><i class="ico" data-icon="orders"></i></div>Orders</div>
+    <div class="nav-item" data-tab="profile" data-act="profile"><div class="nav-ico"><i class="ico" data-icon="profile"></i></div>Profile</div>
   </div>
 
-  <!-- SCREEN: Scan QR (camera mock) -->
-  <div class="screen cam-screen" id="scanScreen">
-    <div class="screen-header">
-      <div class="back-btn tappable close-screen">←</div>
-      <div class="screen-title">Scan to Pay</div>
-      <div class="back-btn flash-btn tappable">⚡</div>
-    </div>
-    <div class="cam-view">
-      <div class="scan-frame">
-        <span class="corner-tl"></span><span class="corner-tr"></span>
-        <span class="corner-bl"></span><span class="corner-br"></span>
-        <div class="scan-line"></div>
-        <div class="cam-hint">Align the merchant's QR code within the frame</div>
-      </div>
-    </div>
-    <div class="cam-sheet">
-      <div class="cam-sheet-row">
-        <div class="cam-sheet-title">Pay a merchant</div>
-        <div class="cam-toggle-btn tappable">My QR Code</div>
-      </div>
-      <div class="recent-chip-row">
-        <div class="recent-chip"><div class="rc-ico">🛒</div><span>Loja Kero</span></div>
-        <div class="recent-chip"><div class="rc-ico">☕</div><span>Café Sol</span></div>
-        <div class="recent-chip"><div class="rc-ico">⛽</div><span>Sonangol</span></div>
-        <div class="recent-chip"><div class="rc-ico">💊</div><span>Farmácia</span></div>
-        <div class="recent-chip"><div class="rc-ico">🍔</div><span>Chicken Spot</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCREEN: generic FORM (send, bank transfer, bills, airtime, data) -->
+  <!-- SCREEN: generic FORM (send, remittance, deposit, withdraw, bill pay) -->
   <div class="screen" id="formScreen">
     <div class="screen-header">
-      <div class="back-btn tappable close-screen">←</div>
+      <div class="back-btn tappable close-screen"><i class="ico" data-icon="chevronleft"></i></div>
       <div class="screen-title" id="formTitle">Form</div>
     </div>
     <div class="screen-body" id="formBody"></div>
   </div>
 
-  <!-- SCREEN: generic LIST (taxi, food, courier, pharmacy, marketplace, explore, orders, profile) -->
+  <!-- SCREEN: generic LIST (moto, transit, courier, food, groceries, pharma, orders, profile) -->
   <div class="screen" id="listScreen">
     <div class="screen-header">
-      <div class="back-btn tappable close-screen">←</div>
+      <div class="back-btn tappable close-screen"><i class="ico" data-icon="chevronleft"></i></div>
       <div class="screen-title" id="listTitle">List</div>
     </div>
     <div class="screen-body" id="listBody"></div>
@@ -831,7 +703,7 @@
   <!-- SCREEN: Wallet detail -->
   <div class="screen" id="walletScreen">
     <div class="screen-header">
-      <div class="back-btn tappable close-screen">←</div>
+      <div class="back-btn tappable close-screen"><i class="ico" data-icon="chevronleft"></i></div>
       <div class="screen-title">My Wallet</div>
     </div>
     <div class="screen-body">
@@ -839,25 +711,25 @@
         <div class="wallet-card">
           <div class="wallet-top">
             <div><div class="wallet-label">Available Balance</div><div class="wallet-balance">AOA 245,000</div></div>
-            <div class="wallet-badge">⭐ 1,240 pts</div>
+            <div class="wallet-badge"><i class="ico star-ico" data-icon="star"></i> 1,240 pts</div>
           </div>
           <div class="wallet-sub">
             <div><span>Cashback earned</span><b>AOA 3,150</b></div>
             <div><span>This month</span><b>+ AOA 42,000</b></div>
           </div>
           <div class="quick-row">
-            <div class="qa-item tappable" data-act="scan"><div class="qa-circle">▦</div><span>Scan QR</span></div>
-            <div class="qa-item tappable" data-act="send"><div class="qa-circle">↑</div><span>Send</span></div>
-            <div class="qa-item tappable" data-act="receive"><div class="qa-circle">↓</div><span>Receive</span></div>
-            <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle">＋</div><span>Add Money</span></div>
+            <div class="qa-item tappable" data-act="send"><div class="qa-circle"><i class="ico" data-icon="arrowupright"></i></div><span>Send</span></div>
+            <div class="qa-item tappable" data-act="receive"><div class="qa-circle"><i class="ico" data-icon="receive"></i></div><span>Receive</span></div>
+            <div class="qa-item tappable" data-act="addmoney"><div class="qa-circle"><i class="ico" data-icon="plus"></i></div><span>Add Money</span></div>
+            <div class="qa-item tappable" data-act="withdraw"><div class="qa-circle"><i class="ico" data-icon="withdraw"></i></div><span>Withdraw</span></div>
           </div>
         </div>
       </div>
       <div class="section"><div class="section-head"><h3>Transaction History</h3></div>
         <div class="activity-list">
-          <div class="activity-row tappable" data-act="act_taxi"><div class="act-ico">🚕</div><div class="act-mid"><div class="act-name">Taxi — Kubinga Ride</div><div class="act-date">Today, 08:12</div></div><div><div class="act-amt">− AOA 1,800</div><div class="act-status done">Completed</div></div></div>
-          <div class="activity-row tappable" data-act="act_electricity"><div class="act-ico">💡</div><div class="act-mid"><div class="act-name">ENDE Electricity Bill</div><div class="act-date">Yesterday, 19:40</div></div><div><div class="act-amt">− AOA 12,400</div><div class="act-status done">Completed</div></div></div>
-          <div class="activity-row tappable" data-act="act_received"><div class="act-ico">↓</div><div class="act-mid"><div class="act-name">Received from Marta S.</div><div class="act-date">Mon, 14:02</div></div><div><div class="act-amt" style="color:var(--success);">+ AOA 25,000</div><div class="act-status pending">Pending</div></div></div>
+          <div class="activity-row tappable" data-act="act_ride"><div class="act-ico"><i class="ico" data-icon="motorbike"></i></div><div class="act-mid"><div class="act-name">Moto-Taxi Ride</div><div class="act-date">Today, 08:12</div></div><div><div class="act-amt">− AOA 800</div><div class="act-status done">Completed</div></div></div>
+          <div class="activity-row tappable" data-act="act_electricity"><div class="act-ico"><i class="ico" data-icon="zap"></i></div><div class="act-mid"><div class="act-name">ENDE Electricity Bill</div><div class="act-date">Yesterday, 19:40</div></div><div><div class="act-amt">− AOA 12,400</div><div class="act-status done">Completed</div></div></div>
+          <div class="activity-row tappable" data-act="act_received"><div class="act-ico"><i class="ico" data-icon="receive"></i></div><div class="act-mid"><div class="act-name">Received from Marta S.</div><div class="act-date">Mon, 14:02</div></div><div><div class="act-amt" style="color:var(--success);">+ AOA 25,000</div><div class="act-status pending">Pending</div></div></div>
         </div>
       </div>
     </div>
@@ -876,6 +748,71 @@
 <script>
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const ICONS = {
+    home: `<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />`,
+    wallet: `<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />`,
+    orders: `<path d="M13 16H8" /> <path d="M14 8H8" /> <path d="M16 12H8" /> <path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z" />`,
+    profile: `<circle cx="12" cy="12" r="10" /> <circle cx="12" cy="10" r="3" /> <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />`,
+    bell: `<path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />`,
+    search: `<path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" />`,
+    mic: `<path d="M12 19v3" /> <path d="M19 10v2a7 7 0 0 1-14 0v-2" /> <rect x="9" y="2" width="6" height="13" rx="3" />`,
+    send: `<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" />`,
+    arrowupright: `<path d="M7 7h10v10" /> <path d="M7 17 17 7" />`,
+    receive: `<path d="M17 7 7 17" /> <path d="M17 17H7V7" />`,
+    plus: `<path d="M5 12h14" /> <path d="M12 5v14" />`,
+    withdraw: `<path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" /> <path d="m16 19 3 3 3-3" /> <path d="M18 12h.01" /> <path d="M19 16v6" /> <path d="M6 12h.01" /> <circle cx="12" cy="12" r="2" />`,
+    globe: `<circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" />`,
+    droplet: `<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" />`,
+    radio: `<path d="M16.247 7.761a6 6 0 0 1 0 8.478" /> <path d="M19.075 4.933a10 10 0 0 1 0 14.134" /> <path d="M4.925 19.067a10 10 0 0 1 0-14.134" /> <path d="M7.753 16.239a6 6 0 0 1 0-8.478" /> <circle cx="12" cy="12" r="2" />`,
+    shield: `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />`,
+    heartpulse: `<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /> <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />`,
+    smartphone: `<rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" />`,
+    trophy: `<path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" /> <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" /> <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" /> <path d="M4 22h16" /> <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" /> <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" />`,
+    utensils: `<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /> <path d="M7 2v20" /> <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />`,
+    utensilscrossed: `<path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" />`,
+    cart: `<circle cx="8" cy="21" r="1" /> <circle cx="19" cy="21" r="1" /> <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />`,
+    bag: `<path d="M16 10a4 4 0 0 1-8 0" /> <path d="M3.103 6.034h17.794" /> <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" />`,
+    basket: `<path d="m15 11-1 9" /> <path d="m19 11-4-7" /> <path d="M2 11h20" /> <path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4" /> <path d="M4.5 15.5h15" /> <path d="m5 11 4-7" /> <path d="m9 11 1 9" />`,
+    pill: `<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" /> <path d="m8.5 8.5 7 7" />`,
+    motorbike: `<path d="m18 14-1-3" /> <path d="m3 9 6 2a2 2 0 0 1 2-2h2a2 2 0 0 1 1.99 1.81" /> <path d="M8 17h3a1 1 0 0 0 1-1 6 6 0 0 1 6-6 1 1 0 0 0 1-1v-.75A5 5 0 0 0 17 5" /> <circle cx="19" cy="17" r="3" /> <circle cx="5" cy="17" r="3" />`,
+    bus: `<path d="M8 6v6" /> <path d="M15 6v6" /> <path d="M2 12h19.6" /> <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /> <circle cx="7" cy="18" r="2" /> <path d="M9 18h5" /> <circle cx="16" cy="18" r="2" />`,
+    busfront: `<path d="M4 6 2 7" /> <path d="M10 6h4" /> <path d="m22 7-2-1" /> <rect width="16" height="16" x="4" y="3" rx="2" /> <path d="M4 11h16" /> <path d="M8 15h.01" /> <path d="M16 15h.01" /> <path d="M6 19v2" /> <path d="M18 21v-2" />`,
+    package: `<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" />`,
+    percent: `<line x1="19" x2="5" y1="5" y2="19" /> <circle cx="6.5" cy="6.5" r="2.5" /> <circle cx="17.5" cy="17.5" r="2.5" />`,
+    userplus: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <line x1="19" x2="19" y1="8" y2="14" /> <line x1="22" x2="16" y1="11" y2="11" />`,
+    zap: `<path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />`,
+    chevronleft: `<path d="m15 18-6-6 6-6" />`,
+    chevronright: `<path d="m9 18 6-6-6-6" />`,
+    lock: `<rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" />`,
+    messagecircle: `<path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />`,
+    store: `<path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /> <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /> <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" />`,
+    moon: `<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />`,
+    user: `<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" />`,
+    hash: `<line x1="4" x2="20" y1="9" y2="9" /> <line x1="4" x2="20" y1="15" y2="15" /> <line x1="10" x2="8" y1="3" y2="21" /> <line x1="16" x2="14" y1="3" y2="21" />`,
+    ticket: `<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /> <path d="M13 5v2" /> <path d="M13 17v2" /> <path d="M13 11v2" />`,
+    filetext: `<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" />`,
+    mappin: `<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" />`,
+    star: `<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />`,
+    wifi: `<path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" />`,
+    battery: `<path d="M10 10v4" /> <path d="M14 10v4" /> <path d="M22 14v-4" /> <path d="M6 10v4" /> <rect x="2" y="6" width="16" height="12" rx="2" />`,
+    signal: `<path d="M2 20h.01" /> <path d="M7 20v-4" /> <path d="M12 20v-8" /> <path d="M17 20V8" /> <path d="M22 4v16" />`,
+    phone: `<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />`,
+    landmark: `<path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" />`,
+  };
+
+  /* ---------- Icon helper (renders Lucide icon markup into [data-icon] placeholders) ---------- */
+  function svgIcon(name){
+    const paths = ICONS[name];
+    if(!paths) return '';
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+  }
+  function renderIcons(root){
+    (root||document).querySelectorAll('[data-icon]').forEach(el=>{
+      el.innerHTML = svgIcon(el.getAttribute('data-icon'));
+    });
+  }
+
+  renderIcons(document);
 
   function openScreen(id){ $('#'+id).classList.add('active'); }
   function closeAllScreens(){ $$('.screen').forEach(s=>s.classList.remove('active')); }
@@ -901,7 +838,7 @@
       html += `</div>`;
     }
     html += `<div class="field-block"><div class="field-label">${cfg.fieldLabel}</div>
-      <div class="text-input">${cfg.fieldPrefix||''} <span class="ph">${cfg.fieldPlaceholder}</span></div></div>`;
+      <div class="text-input">${cfg.fieldPrefixIcon ? `<i class="ico" data-icon="${cfg.fieldPrefixIcon}"></i>` : ''}${cfg.fieldPrefixText ? ' '+cfg.fieldPrefixText : ''} <span class="ph">${cfg.fieldPlaceholder}</span></div></div>`;
     if(cfg.amounts){
       html += `<div class="field-block"><div class="field-label">${cfg.amountsLabel||'Select amount (AOA)'}</div>
         <div class="amount-chips">`;
@@ -915,6 +852,7 @@
       <div style="text-align:right;"><div class="lbl">Amount</div><div class="val" id="formAmt">AOA ${defaultAmt}</div></div></div>`;
     html += `<div class="continue-btn tappable">${cfg.cta}</div>`;
     $('#formBody').innerHTML = html;
+    renderIcons($('#formBody'));
     openScreen('formScreen');
   }
   function selectChip(el){
@@ -936,7 +874,7 @@
     html += `<div style="padding-top:14px;">`;
     cfg.items.forEach((it,i)=>{
       html += `<div class="list-row${i===0?' selected':''}" onclick="selectRow(this)">
-        <div class="list-ico" style="background:${it.color}">${it.icon}</div>
+        <div class="list-ico" style="background:${it.color}"><i class="ico" data-icon="${it.icon}"></i></div>
         <div class="list-mid"><div class="list-name">${it.name}</div><div class="list-sub">${it.sub}</div></div>
         <div class="list-right"><div class="list-price">${it.price}</div><div class="list-meta">${it.meta}</div></div>
       </div>`;
@@ -944,6 +882,7 @@
     html += `</div>`;
     if(cfg.cta){ html += `<div class="continue-btn tappable">${cfg.cta}</div>`; }
     $('#listBody').innerHTML = html;
+    renderIcons($('#listBody'));
     openScreen('listScreen');
   }
   function selectRow(el){
@@ -954,7 +893,7 @@
   /* ---------- SHEET template ---------- */
   function buildSheet(cfg){
     let html = `<div class="sheet-head">
-      <div class="sheet-ico" style="background:${cfg.color}">${cfg.icon}</div>
+      <div class="sheet-ico" style="background:${cfg.color}"><i class="ico" data-icon="${cfg.icon}"></i></div>
       <div><div class="sheet-title">${cfg.title}</div><div class="sheet-subtitle">${cfg.subtitle}</div></div>
     </div>`;
     if(cfg.desc){ html += `<div class="sheet-desc">${cfg.desc}</div>`; }
@@ -962,178 +901,129 @@
       cfg.rows.forEach(r=>{ html += `<div class="sheet-row"><span class="k">${r.k}</span><span class="v">${r.v}</span></div>`; });
     }
     if(cfg.menu){
-      cfg.menu.forEach(m=>{ html += `<div class="sheet-menu-row"><span class="mi">${m.icon}</span><span class="mt">${m.label}</span><span>›</span></div>`; });
+      cfg.menu.forEach(m=>{ html += `<div class="sheet-menu-row"><span class="mi"><i class="ico" data-icon="${m.icon}"></i></span><span class="mt">${m.label}</span><span class="mc ico" data-icon="chevronright"></span></div>`; });
     }
     if(cfg.cta){ html += `<div class="sheet-cta tappable">${cfg.cta}</div>`; }
     if(cfg.secondary){ html += `<div class="sheet-cta secondary tappable">${cfg.secondary}</div>`; }
     $('#sheetContent').innerHTML = html;
+    renderIcons($('#sheetContent'));
     openSheet();
   }
 
   /* ---------- Action registry ---------- */
   const ACTIONS = {
-    scan: () => openScreen('scanScreen'),
 
     send: () => buildForm({title:'Send Money', chipsLabel:'Send to', chips:[
         {label:'Marta S.', letter:'M', color:'var(--blue-600)'},{label:'Pedro F.', letter:'P', color:'var(--emerald-700)'},{label:'Ana L.', letter:'A', color:'var(--orange-500)'}],
-      fieldLabel:'Recipient', fieldPrefix:'👤', fieldPlaceholder:'Search name or phone number',
+      fieldLabel:'Recipient', fieldPrefixIcon:'user', fieldPlaceholder:'Search name or phone number',
       amounts:[2000,5000,10000,20000], summaryLabel:'Sending to', summaryValue:'Pedro F.', cta:'Send Money'}),
 
-    banktransfer: () => buildForm({title:'Bank Transfer', chipsLabel:'Select bank', chips:[
-        {label:'BAI', letter:'B', color:'var(--emerald-700)'},{label:'BFA', letter:'F', color:'var(--blue-600)'},{label:'Standard', letter:'S', color:'var(--orange-500)'}],
-      fieldLabel:'Account number', fieldPrefix:'🏦', fieldPlaceholder:'Enter IBAN or account number',
-      amounts:[10000,25000,50000,100000], summaryLabel:'Transfer to', summaryValue:'BAI ••• 4821', cta:'Transfer'}),
+    remittance: () => buildForm({title:'Send Abroad', chipsLabel:'Send to country', chips:[
+        {label:'Portugal', letter:'P', color:'var(--emerald-700)'},{label:'South Africa', letter:'S', color:'var(--blue-600)'},{label:'Namibia', letter:'N', color:'var(--orange-500)'}],
+      fieldLabel:'Recipient wallet or bank account', fieldPrefixIcon:'globe', fieldPlaceholder:'Enter wallet number or IBAN',
+      amounts:[20000,50000,100000,200000], summaryLabel:'Delivery method', summaryValue:'Instant to Wallet', cta:'Send Abroad'}),
 
-    utilitybills: () => buildForm({title:'Utility Bills', chipsLabel:'Select biller', chips:[
-        {label:'ENDE', letter:'E', color:'var(--orange-500)'},{label:'EPAL', letter:'W', color:'var(--blue-600)'},{label:'ZAP', letter:'Z', color:'var(--emerald-700)'}],
-      fieldLabel:'Meter / account number', fieldPrefix:'🔢', fieldPlaceholder:'Enter meter number',
-      amounts:[5000,12400,20000,30000], summaryLabel:'Paying', summaryValue:'ENDE Electricity', cta:'Pay Bill'}),
-
-    payelectricity: () => buildForm({title:'Pay Electricity', chipsLabel:'Biller', chips:[{label:'ENDE', letter:'E', color:'var(--orange-500)'}],
-      fieldLabel:'Meter number', fieldPrefix:'🔢', fieldPlaceholder:'0021 4487 992',
-      fixedAmount:'12,400', summaryLabel:'Amount due', summaryValue:'Due tomorrow', cta:'Pay AOA 12,400'}),
-
-    paywater: () => buildForm({title:'Pay Water', chipsLabel:'Biller', chips:[{label:'EPAL', letter:'W', color:'var(--blue-600)'}],
-      fieldLabel:'Account number', fieldPrefix:'🔢', fieldPlaceholder:'EP-88214-AO',
-      fixedAmount:'6,200', summaryLabel:'Amount due', summaryValue:'Due in 4 days', cta:'Pay AOA 6,200'}),
-
-    airtime: () => buildForm({title:'Buy Airtime', chipsLabel:'Select network', chips:[
-        {label:'Unitel', letter:'U', color:'var(--error)'},{label:'Movicel', letter:'M', color:'var(--blue-600)'},{label:'Africell', letter:'A', color:'var(--orange-500)'}],
-      fieldLabel:'Phone number', fieldPrefix:'🇦🇴 +244', fieldPlaceholder:'923 456 789',
-      amounts:[500,1000,2000,5000], summaryLabel:'Pay from', summaryValue:'AkiPaga Wallet', cta:'Continue'}),
-
-    mobiledata: () => buildForm({title:'Buy Mobile Data', chipsLabel:'Select network', chips:[
-        {label:'Unitel', letter:'U', color:'var(--error)'},{label:'Movicel', letter:'M', color:'var(--blue-600)'},{label:'Africell', letter:'A', color:'var(--orange-500)'}],
-      fieldLabel:'Phone number', fieldPrefix:'🇦🇴 +244', fieldPlaceholder:'923 456 789',
-      amountsLabel:'Select data bundle', amounts:['1GB','2GB','5GB','10GB'],
-      summaryLabel:'Pay from', summaryValue:'AkiPaga Wallet', cta:'Continue'}),
-
-    receive: () => buildSheet({title:'Receive Money', subtitle:'Share your code or account number', icon:'↓', color:'var(--emerald-700)',
-      desc:'Ask the sender to scan this code, or share your AkiPaga number below to receive a payment.',
-      rows:[{k:'Account name',v:'João Nzau'},{k:'AkiPaga number',v:'+244 923 456 789'}],
-      cta:'Share My QR Code', secondary:'Copy Account Number'}),
-
-    addmoney: () => buildForm({title:'Add Money', chipsLabel:'Funding source', chips:[
-        {label:'Bank', letter:'B', color:'var(--blue-600)'},{label:'Card', letter:'C', color:'var(--emerald-700)'},{label:'Cash Agent', letter:'A', color:'var(--orange-500)'}],
-      fieldLabel:'Source details', fieldPrefix:'🏦', fieldPlaceholder:'BAI account ••• 4821',
+    addmoney: () => buildForm({title:'Add Money', chipsLabel:'Deposit via', chips:[
+        {label:'Cash Agent', letter:'A', color:'var(--orange-500)'},{label:'Bank Transfer', letter:'B', color:'var(--blue-600)'}],
+      fieldLabel:'Source details', fieldPrefixIcon:'landmark', fieldPlaceholder:'Agent code or account number',
       amounts:[10000,25000,50000,100000], summaryLabel:'Adding to', summaryValue:'AkiPaga Wallet', cta:'Add Money'}),
 
-    taxi: () => buildList({title:'Book a Ride', subheader:'From: Current location  →  To: Enter destination', items:[
-        {icon:'🏍️', color:'var(--orange-500)', name:'Moto-Taxi', sub:'1 seat · fastest through traffic', price:'AOA 800', meta:'3 min'},
-        {icon:'🚗', color:'var(--emerald-700)', name:'Standard Car', sub:'Up to 4 seats', price:'AOA 1,800', meta:'6 min'},
-        {icon:'✨', color:'var(--blue-600)', name:'Comfort', sub:'Newer cars, AC guaranteed', price:'AOA 2,600', meta:'8 min'},
-        {icon:'🚌', color:'var(--ink-600)', name:'Shared Transit', sub:'Fixed-route intercity van', price:'AOA 400', meta:'12 min'}], cta:'Confirm Ride'}),
+    withdraw: () => buildForm({title:'Withdraw Money', chipsLabel:'Withdraw via', chips:[
+        {label:'Cash Agent', letter:'A', color:'var(--orange-500)'}],
+      fieldLabel:'Agent code or location', fieldPrefixIcon:'mappin', fieldPlaceholder:'Enter agent code',
+      amounts:[5000,10000,20000,50000], summaryLabel:'Withdraw from', summaryValue:'AkiPaga Wallet', cta:'Withdraw'}),
 
-    food: () => buildList({title:'Food Delivery', subheader:'Restaurants near you', items:[
-        {icon:'🍗', color:'var(--error)', name:'Chicken Spot', sub:'Fast food · 4.6 ★', price:'AOA 3,500', meta:'25–35 min'},
-        {icon:'🍲', color:'var(--orange-500)', name:'Sabor de Angola', sub:'Local cuisine · 4.8 ★', price:'AOA 5,200', meta:'30–40 min'},
-        {icon:'🍕', color:'var(--emerald-700)', name:'Luanda Pizza Co.', sub:'Pizza & pasta · 4.5 ★', price:'AOA 4,000', meta:'20–30 min'}], cta:'View Menu'}),
+    receive: () => buildSheet({title:'Receive Money', subtitle:'Share your code or account number', icon:'receive', color:'var(--emerald-700)',
+      desc:'Share your AkiPaga number below, or let the sender find you by phone number to receive a payment.',
+      rows:[{k:'Account name',v:'João Nzau'},{k:'AkiPaga number',v:'+244 923 456 789'}],
+      cta:'Share My Details', secondary:'Copy Account Number'}),
+
+    epal: () => buildForm({title:'EPAL Water Bill', chipsLabel:'Biller', chips:[{label:'EPAL', letter:'W', color:'var(--blue-600)'}],
+      fieldLabel:'Account number', fieldPrefixIcon:'hash', fieldPlaceholder:'EP-88214-AO',
+      amounts:[3000,6200,10000,15000], summaryLabel:'Paying', summaryValue:'EPAL Water', cta:'Pay Bill'}),
+
+    zap: () => buildForm({title:'ZAP Bill', chipsLabel:'Biller', chips:[{label:'ZAP', letter:'Z', color:'var(--emerald-700)'}],
+      fieldLabel:'Customer number', fieldPrefixIcon:'hash', fieldPlaceholder:'ZP-88231',
+      amounts:[6000,12000,18000,25000], summaryLabel:'Paying', summaryValue:'ZAP Telecom', cta:'Pay Bill'}),
+
+    nossaseguros: () => buildForm({title:'Nossa Seguros', chipsLabel:'Insurer', chips:[{label:'Nossa Seguros', letter:'N', color:'var(--orange-500)'}],
+      fieldLabel:'Policy number', fieldPrefixIcon:'filetext', fieldPlaceholder:'Enter policy number',
+      amounts:[8000,15000,25000,40000], summaryLabel:'Paying premium for', summaryValue:'Nossa Seguros', cta:'Pay Premium'}),
+
+    sanlam: () => buildForm({title:'Sanlam Seguro Vida', chipsLabel:'Insurer', chips:[{label:'Sanlam Vida', letter:'S', color:'var(--error)'}],
+      fieldLabel:'Policy number', fieldPrefixIcon:'filetext', fieldPlaceholder:'Enter policy number',
+      amounts:[10000,20000,30000,50000], summaryLabel:'Paying premium for', summaryValue:'Sanlam Seguro Vida', cta:'Pay Premium'}),
+
+    unitel: () => buildForm({title:'Unitel Recarga', chipsLabel:'Network', chips:[{label:'Unitel', letter:'U', color:'var(--emerald-500)'}],
+      fieldLabel:'Phone number', fieldPrefixIcon:'phone', fieldPrefixText:'+244', fieldPlaceholder:'923 456 789',
+      amounts:[500,1000,2000,5000], summaryLabel:'Pay from', summaryValue:'AkiPaga Wallet', cta:'Buy Airtime'}),
+
+    zulubet: () => buildForm({title:'Zulubet', chipsLabel:'Betting account', chips:[{label:'Zulubet', letter:'Z', color:'var(--ink-600)'}],
+      fieldLabel:'Zulubet account / phone number', fieldPrefixIcon:'ticket', fieldPlaceholder:'Enter account number',
+      amounts:[1000,2000,5000,10000], summaryLabel:'Funding', summaryValue:'Zulubet Account', cta:'Fund Account'}),
+
+    moto: () => buildList({title:'Moto-Taxi', subheader:'From: Current location  <i class="ico" data-icon="chevronright" style="width:11px;height:11px;"></i>  To: Enter destination', items:[
+        {icon:'motorbike', color:'var(--orange-500)', name:'Moto Economy', sub:'1 seat · fastest through traffic', price:'AOA 800', meta:'3 min'},
+        {icon:'motorbike', color:'var(--emerald-700)', name:'Moto Comfort', sub:'Experienced rider, helmet included', price:'AOA 1,100', meta:'5 min'},
+        {icon:'moon', color:'var(--blue-600)', name:'Moto Night', sub:'Late-night rides, reflective gear', price:'AOA 1,400', meta:'7 min'}], cta:'Confirm Ride'}),
+
+    transit: () => buildList({title:'Transit', subheader:'Intercity & intracity routes', items:[
+        {icon:'busfront', color:'var(--emerald-700)', name:'Kubinga Shared Van', sub:'Intracity · fixed route', price:'AOA 400', meta:'12 min'},
+        {icon:'bus', color:'var(--blue-600)', name:'Luanda to Benguela', sub:'Intercity bus', price:'AOA 6,500', meta:'6 hrs'},
+        {icon:'bus', color:'var(--orange-500)', name:'Luanda to Huambo', sub:'Intercity bus', price:'AOA 7,200', meta:'7 hrs'}], cta:'Book Seat'}),
 
     courier: () => buildList({title:'Send a Package', subheader:'Choose delivery speed', items:[
-        {icon:'🏍️', color:'var(--orange-500)', name:'Same-day Moto', sub:'Small packages, under 5kg', price:'AOA 1,200', meta:'2–4 hrs'},
-        {icon:'📦', color:'var(--emerald-700)', name:'Standard Package', sub:'Up to 20kg', price:'AOA 2,800', meta:'Next day'},
-        {icon:'⚡', color:'var(--blue-600)', name:'Express', sub:'Priority handling', price:'AOA 4,500', meta:'60–90 min'}], cta:'Schedule Pickup'}),
+        {icon:'motorbike', color:'var(--orange-500)', name:'Same-day Moto', sub:'Small packages, under 5kg', price:'AOA 1,200', meta:'2–4 hrs'},
+        {icon:'package', color:'var(--emerald-700)', name:'Standard Package', sub:'Up to 20kg', price:'AOA 2,800', meta:'Next day'},
+        {icon:'zap', color:'var(--blue-600)', name:'Express', sub:'Priority handling', price:'AOA 4,500', meta:'60–90 min'}], cta:'Schedule Pickup'}),
 
-    pharmacy: () => buildList({title:'Pharmacy', subheader:'Nearby pharmacies', items:[
-        {icon:'💊', color:'var(--success)', name:'Farmácia Central', sub:'620m · Open now', price:'', meta:'Delivers'},
-        {icon:'💊', color:'var(--blue-600)', name:'Farmácia Nova Vida', sub:'890m · Open now', price:'', meta:'Delivers'},
-        {icon:'💊', color:'var(--orange-500)', name:'Farmácia São Paulo', sub:'1.4km · Closes 9pm', price:'', meta:'Pickup only'}], cta:'Order Medicine'}),
+    food: () => buildList({title:'Food Delivery', subheader:'Restaurants near you', items:[
+        {icon:'utensils', color:'var(--error)', name:'Chicken Spot', sub:'Fast food · 4.6 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 3,500', meta:'25–35 min'},
+        {icon:'utensilscrossed', color:'var(--orange-500)', name:'Sabor de Angola', sub:'Local cuisine · 4.8 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 5,200', meta:'30–40 min'},
+        {icon:'utensils', color:'var(--emerald-700)', name:'Luanda Pizza Co.', sub:'Pizza & pasta · 4.5 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 4,000', meta:'20–30 min'}], cta:'View Menu'}),
 
-    marketplace: () => buildList({title:'Marketplace', subheader:'Browse categories', items:[
-        {icon:'🛒', color:'var(--emerald-700)', name:'Groceries', sub:'Fresh produce & pantry', price:'', meta:'1.2k items'},
-        {icon:'📱', color:'var(--blue-600)', name:'Electronics', sub:'Phones, accessories', price:'', meta:'480 items'},
-        {icon:'👗', color:'var(--orange-500)', name:'Fashion', sub:'Clothing & footwear', price:'', meta:'900 items'},
-        {icon:'🏠', color:'var(--ink-600)', name:'Home & Living', sub:'Furniture, décor', price:'', meta:'350 items'}], cta:'Browse Selected Category'}),
+    groceries: () => buildList({title:'Groceries', subheader:'Supermarkets near you', items:[
+        {icon:'cart', color:'var(--emerald-700)', name:'Kero Supermarket', sub:'Fresh produce & pantry · 4.6 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 2,000', meta:'35–45 min'},
+        {icon:'store', color:'var(--blue-600)', name:'Shoprite Luanda', sub:'Groceries & household · 4.5 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 2,500', meta:'40–50 min'},
+        {icon:'basket', color:'var(--orange-500)', name:'Candando', sub:'Local market basket · 4.4 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 1,800', meta:'30–40 min'}], cta:'Start Shopping'}),
 
-    explore: () => buildList({title:'Explore All Services', subheader:'Everything on AkiPaga', items:[
-        {icon:'🚕', color:'var(--orange-500)', name:'Mobility', sub:'Taxi, tricycle, transit', price:'', meta:''},
-        {icon:'🍔', color:'var(--error)', name:'Delivery', sub:'Food, groceries, packages', price:'', meta:''},
-        {icon:'💰', color:'var(--emerald-700)', name:'Finance', sub:'Payments, loans, insurance', price:'', meta:''},
-        {icon:'🏛️', color:'var(--blue-600)', name:'Government', sub:'Tax, ID, permits', price:'', meta:''},
-        {icon:'🤝', color:'var(--success)', name:'Community', sub:'Savings groups, local services', price:'', meta:''}]}),
+    pharma: () => buildList({title:'Pharma', subheader:'Nearby pharmacies', items:[
+        {icon:'pill', color:'var(--success)', name:'Farmácia Central', sub:'620m · Open now', price:'', meta:'Delivers'},
+        {icon:'pill', color:'var(--blue-600)', name:'Farmácia Nova Vida', sub:'890m · Open now', price:'', meta:'Delivers'},
+        {icon:'pill', color:'var(--orange-500)', name:'Farmácia São Paulo', sub:'1.4km · Closes 9pm', price:'', meta:'Pickup only'}], cta:'Order Medicine'}),
 
     orders: () => buildList({title:'My Orders', subheader:'Recent orders', items:[
-        {icon:'🍗', color:'var(--error)', name:'Chicken Spot', sub:'Food delivery · Today', price:'AOA 3,500', meta:'Delivered'},
-        {icon:'🚕', color:'var(--orange-500)', name:'Kubinga Ride', sub:'Mobility · Today', price:'AOA 1,800', meta:'Completed'},
-        {icon:'📦', color:'var(--ink-600)', name:'Package to Benguela', sub:'Courier · Yesterday', price:'AOA 2,800', meta:'In transit'}]}),
+        {icon:'utensils', color:'var(--error)', name:'Chicken Spot', sub:'Food delivery · Today', price:'AOA 3,500', meta:'Delivered'},
+        {icon:'motorbike', color:'var(--orange-500)', name:'Moto-Taxi Ride', sub:'Mobility · Today', price:'AOA 800', meta:'Completed'},
+        {icon:'package', color:'var(--ink-600)', name:'Package to Benguela', sub:'Courier · Yesterday', price:'AOA 2,800', meta:'In transit'}]}),
 
     profile: () => buildList({title:'Profile', subheader:'Account', items:[
-        {icon:'👤', color:'var(--emerald-700)', name:'Account Details', sub:'João M. · +244 923 456 789', price:'', meta:''},
-        {icon:'🔒', color:'var(--blue-600)', name:'Security & PIN', sub:'Manage login & PIN', price:'', meta:''},
-        {icon:'🌍', color:'var(--orange-500)', name:'Language', sub:'Português / English / Français / 中文', price:'', meta:''},
-        {icon:'💬', color:'var(--success)', name:'Help & Support', sub:'Chat with us', price:'', meta:''}]}),
+        {icon:'user', color:'var(--emerald-700)', name:'Account Details', sub:'João M. · +244 923 456 789', price:'', meta:''},
+        {icon:'lock', color:'var(--blue-600)', name:'Security & PIN', sub:'Manage login & PIN', price:'', meta:''},
+        {icon:'globe', color:'var(--orange-500)', name:'Language', sub:'Português / English / Français / 中文', price:'', meta:''},
+        {icon:'messagecircle', color:'var(--success)', name:'Help & Support', sub:'Chat with us', price:'', meta:''}]}),
 
     wallet: () => openScreen('walletScreen'),
 
-    notifications: () => buildSheet({title:'Notifications', subtitle:'3 new updates', icon:'🔔', color:'var(--emerald-700)',
-      menu:[{icon:'💰',label:'You received AOA 25,000 from Marta S.'},{icon:'💡',label:'Electricity bill due tomorrow'},{icon:'🎁',label:'20% cashback offer just for you'}]}),
+    notifications: () => buildSheet({title:'Notifications', subtitle:'3 new updates', icon:'bell', color:'var(--emerald-700)',
+      menu:[{icon:'receive',label:'You received AOA 25,000 from Marta S.'},{icon:'zap',label:'Electricity bill due tomorrow'},{icon:'percent',label:'20% cashback on bill payments'}]}),
 
-    search: () => buildSheet({title:'Search', subtitle:'Try a service, merchant or bill', icon:'🔍', color:'var(--blue-600)',
-      menu:[{icon:'🚕',label:'Taxi'},{icon:'💡',label:'Electricity Bill'},{icon:'📶',label:'Airtime'},{icon:'🛍️',label:'Marketplace'}]}),
+    search: () => buildSheet({title:'Search', subtitle:'Try a service, bill or transfer', icon:'search', color:'var(--blue-600)',
+      menu:[{icon:'arrowupright',label:'Send Money'},{icon:'droplet',label:'EPAL Water Bill'},{icon:'smartphone',label:'Unitel Recarga'},{icon:'motorbike',label:'Moto-Taxi'}]}),
 
-    receiptinternet: () => buildSheet({title:'Internet Bill', subtitle:'ZAP Fibra · Paid', icon:'📡', color:'var(--emerald-700)',
-      rows:[{k:'Amount',v:'AOA 18,000'},{k:'Date',v:'26 Jul 2026'},{k:'Reference',v:'ZP-88231'},{k:'Status',v:'Paid'}],
-      cta:'Download Receipt'}),
-
-    mini_gov: () => buildSheet({title:'Government Services', subtitle:'Tax, ID & permits', icon:'🏛️', color:'var(--blue-600)',
-      desc:'Pay taxes, request ID documents, and manage government permits, all in one place.', cta:'Open Mini App'}),
-    mini_vehicle: () => buildSheet({title:'Vehicle Registration', subtitle:'Renew or register a vehicle', icon:'🚗', color:'var(--emerald-700)',
-      desc:'Register a new vehicle or renew existing documents without visiting an office.', cta:'Start Registration'}),
-    mini_passport: () => buildSheet({title:'Passport Renewal', subtitle:'Track & renew documents', icon:'🛂', color:'var(--orange-500)',
-      desc:'Check your passport application status or start a renewal request.', cta:'Check Status'}),
-    mini_hospital: () => buildSheet({title:'Hospital Appointments', subtitle:'Book a clinic visit', icon:'🏥', color:'var(--error)',
-      desc:'Find nearby clinics and book an appointment with a doctor.', cta:'Find a Clinic'}),
-    mini_agri: () => buildSheet({title:'Agriculture', subtitle:'Market prices & supplies', icon:'🌾', color:'var(--success)',
-      desc:'Check live crop prices and order farming supplies for delivery.', cta:'View Market Prices'}),
-
-    daily_finance: () => buildSheet({title:'Finance', subtitle:'Loans, savings, insurance', icon:'💰', color:'var(--emerald-700)',
-      menu:[{icon:'💳',label:'Micro Loans'},{icon:'🏦',label:'Savings'},{icon:'🛡️',label:'Insurance (via Proteja)'}]}),
-
-    nearby_agent: () => buildSheet({title:'Cash Agent — Kinaxixi', subtitle:'350m away · Open now', icon:'💵', color:'var(--emerald-700)',
-      rows:[{k:'Hours',v:'8:00 – 19:00'},{k:'Services',v:'Cash in / Cash out'},{k:'Phone',v:'+244 912 000 111'}],
-      cta:'Get Directions', secondary:'Call Agent'}),
-    nearby_pharmacy: () => buildSheet({title:'Farmácia Central', subtitle:'620m away · Open now', icon:'💊', color:'var(--success)',
-      rows:[{k:'Hours',v:'7:00 – 22:00'},{k:'Delivery',v:'Available'},{k:'Phone',v:'+244 912 222 333'}],
-      cta:'Get Directions', secondary:'Order Medicine'}),
-    nearby_fuel: () => buildSheet({title:'Sonangol Fuel Station', subtitle:'1.1km away · Open now', icon:'⛽', color:'var(--orange-500)',
-      rows:[{k:'Hours',v:'24 hours'},{k:'Payment',v:'QR & Card accepted'}],
-      cta:'Get Directions'}),
-
-    promo_cashback: () => buildSheet({title:'20% Cashback', subtitle:'On all bill payments this week', icon:'🎁', color:'var(--emerald-700)',
-      desc:'Pay any utility bill through AkiPaga this week and get 20% back into your wallet, up to AOA 5,000.', cta:'Claim Offer'}),
-    promo_ride: () => buildSheet({title:'Ride Discounts', subtitle:'30% off your next 3 rides', icon:'🚕', color:'var(--blue-600)',
-      desc:'Book any ride through the app and the discount is applied automatically at checkout.', cta:'Book a Ride'}),
-    promo_refer: () => buildSheet({title:'Refer & Earn', subtitle:'Get AOA 2,000 per friend', icon:'🤝', color:'var(--orange-500)',
+    promo_cashback: () => buildSheet({title:'20% Cashback', subtitle:'On all bill payments this week', icon:'percent', color:'var(--emerald-700)',
+      desc:'Pay any bill through AkiPaga this week and get 20% back into your wallet, up to AOA 5,000.', cta:'Claim Offer'}),
+    promo_remit: () => buildSheet({title:'Remittance Discount', subtitle:'Reduced fees on transfers abroad', icon:'globe', color:'var(--blue-600)',
+      desc:'Send money to any of our 30+ supported countries this month with reduced transfer fees, applied automatically at checkout.', cta:'Send Abroad'}),
+    promo_refer: () => buildSheet({title:'Refer & Earn', subtitle:'Get AOA 2,000 per friend', icon:'userplus', color:'var(--orange-500)',
       desc:'Share your invite code. When a friend signs up and completes their first payment, you both earn AOA 2,000.', cta:'Share Invite Code'}),
 
-    act_taxi: () => buildSheet({title:'Taxi — Kubinga Ride', subtitle:'Today, 08:12 · Completed', icon:'🚕', color:'var(--orange-500)',
-      rows:[{k:'Amount',v:'AOA 1,800'},{k:'Route',v:'Maianga → Talatona'},{k:'Payment',v:'AkiPaga Wallet'}], cta:'Book Again', secondary:'Share Receipt'}),
-    act_electricity: () => buildSheet({title:'ENDE Electricity Bill', subtitle:'Yesterday, 19:40 · Completed', icon:'💡', color:'var(--orange-500)',
+    act_ride: () => buildSheet({title:'Moto-Taxi Ride', subtitle:'Today, 08:12 · Completed', icon:'motorbike', color:'var(--orange-500)',
+      rows:[{k:'Amount',v:'AOA 800'},{k:'Route',v:'Maianga to Talatona'},{k:'Payment',v:'AkiPaga Wallet'}], cta:'Book Again', secondary:'Share Receipt'}),
+    act_electricity: () => buildSheet({title:'ENDE Electricity Bill', subtitle:'Yesterday, 19:40 · Completed', icon:'zap', color:'var(--orange-500)',
       rows:[{k:'Amount',v:'AOA 12,400'},{k:'Meter',v:'0021 4487 992'},{k:'Reference',v:'END-77213'}], cta:'Download Receipt'}),
-    act_received: () => buildSheet({title:'Received from Marta S.', subtitle:'Monday, 14:02 · Pending', icon:'↓', color:'var(--success)',
+    act_received: () => buildSheet({title:'Received from Marta S.', subtitle:'Monday, 14:02 · Pending', icon:'receive', color:'var(--success)',
       rows:[{k:'Amount',v:'AOA 25,000'},{k:'Status',v:'Pending confirmation'}], cta:'View Details'}),
-
-    biz_qr: () => buildSheet({title:'Accept QR Payments', subtitle:'Merchant tools', icon:'▦', color:'var(--emerald-700)',
-      desc:'Generate a payment QR code for your store and get notified instantly when a customer pays.', cta:'Open Module'}),
-    biz_inventory: () => buildSheet({title:'Inventory', subtitle:'Merchant tools', icon:'📦', color:'var(--blue-600)',
-      desc:'Track stock levels across your products and get low-stock alerts.', cta:'Open Module'}),
-    biz_invoices: () => buildSheet({title:'Invoices', subtitle:'Merchant tools', icon:'🧾', color:'var(--orange-500)',
-      desc:'Create and send invoices to customers, and track which ones are paid.', cta:'Open Module'}),
-    biz_pos: () => buildSheet({title:'POS', subtitle:'Merchant tools', icon:'💳', color:'var(--emerald-500)',
-      desc:'Turn your phone into a point-of-sale terminal for in-person payments.', cta:'Open Module'}),
-    biz_payroll: () => buildSheet({title:'Employee Payroll', subtitle:'Merchant tools', icon:'👥', color:'var(--ink-600)',
-      desc:'Pay staff directly into their AkiPaga wallets on a schedule you set.', cta:'Open Module'}),
-    biz_analytics: () => buildSheet({title:'Business Analytics', subtitle:'Merchant tools', icon:'📊', color:'var(--success)',
-      desc:'See sales trends, best-selling items, and customer insights at a glance.', cta:'Open Module'}),
-
-    comm_savings: () => buildSheet({title:'Savings Groups', subtitle:'Join a rotating fund', icon:'🤝', color:'var(--emerald-700)',
-      desc:'Join a trusted community savings circle (kixikila-style) and contribute on a shared schedule.', cta:'Join a Group'}),
-    comm_electrician: () => buildSheet({title:'Verified Electrician', subtitle:'Book a home visit', icon:'🔌', color:'var(--orange-500)',
-      rows:[{k:'Rating',v:'4.7 ★ (128 jobs)'},{k:'Availability',v:'Today, from 2pm'}], cta:'Book Now'}),
-    comm_plumber: () => buildSheet({title:'Verified Plumber', subtitle:'Same-day availability', icon:'🔧', color:'var(--blue-600)',
-      rows:[{k:'Rating',v:'4.6 ★ (94 jobs)'},{k:'Availability',v:'Today, from 4pm'}], cta:'Book Now'}),
-    comm_tutors: () => buildSheet({title:'Tutors', subtitle:'Local & verified', icon:'📚', color:'var(--success)',
-      rows:[{k:'Subjects',v:'Math, Portuguese, English'},{k:'Rating',v:'4.8 ★ (210 sessions)'}], cta:'Find a Tutor'}),
   };
 
   document.addEventListener('click', function(e){
@@ -1151,13 +1041,10 @@
       $$('.nav-item').forEach(n=>n.classList.remove('active'));
       const tab = el.closest('.nav-item');
       if(tab) tab.classList.add('active');
+      closeAllScreens();
+      closeSheet();
       ACTIONS[key]();
     }
-  });
-
-  /* Merchant mode switch (visual only) */
-  document.getElementById('merchantSwitch').addEventListener('click', function(){
-    this.classList.toggle('tappable');
   });
 </script>
 
