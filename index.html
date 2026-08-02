@@ -8,26 +8,30 @@
   @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
   :root{
-    --emerald-900:#063C2E;
-    --emerald-700:#0B6B4F;
-    --emerald-500:#128A63;
-    --blue-600:#2451B8;
-    --orange-500:#F2994A;
-    --success:#219653;
-    --warning:#F2C94C;
-    --error:#EB5757;
-    --bg:#F3F5F4;
+    --primary:#E9A514;
+    --secondary:#457ABD;
+    --primary-dark:#B77800;
+    --secondary-dark:#2F5B90;
+    --emerald-900:var(--primary-dark);
+    --emerald-700:var(--primary);
+    --emerald-500:#F0BF46;
+    --blue-600:var(--secondary);
+    --orange-500:var(--primary);
+    --success:var(--secondary);
+    --warning:var(--primary);
+    --error:var(--secondary);
+    --bg:#F7F4EC;
     --card:#FFFFFF;
-    --ink-900:#0E1F1A;
-    --ink-600:#5B6B65;
-    --ink-400:#93A29C;
-    --line:#E6ECE9;
+    --ink-900:#10253C;
+    --ink-600:#4F647A;
+    --ink-400:#73839A;
+    --line:#E6EAF1;
   }
 
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:#ffffff;
+    background:#F2EFE7;
     display:flex;
     justify-content:center;
     font-family:'Inter',sans-serif;
@@ -158,10 +162,10 @@
   .greet-block{display:flex; gap:10px; align-items:center;}
   .avatar{
     width:44px;height:44px;border-radius:50%;
-    background:linear-gradient(135deg,var(--emerald-500),var(--blue-600));
+    background:var(--secondary);
     display:flex;align-items:center;justify-content:center;
     color:#fff;font-family:'Manrope';font-weight:800;font-size:16px;
-    box-shadow:0 4px 10px rgba(11,107,79,0.25);
+    box-shadow:0 4px 10px rgba(69,122,189,0.18);
   }
   .greet-text .hi{font-family:'Manrope';font-weight:800;font-size:15px;line-height:1.1;}
   .greet-text .loc{font-size:12px;color:var(--ink-600);display:flex;align-items:center;gap:3px;margin-top:2px;}
@@ -181,9 +185,10 @@
     border:1.5px solid var(--card);
   }
   .lang-toggle{
-    font-size:11px; font-weight:700; color:var(--emerald-700);
-    background:#E4F1EC; border-radius:20px; padding:6px 10px;
+    font-size:11px; font-weight:700; color:var(--secondary);
+    background:rgba(69,122,189,0.12); border-radius:20px; padding:6px 10px;
     display:flex; align-items:center; gap:4px; white-space:nowrap;
+    cursor:pointer;
   }
 
   /* Search */
@@ -200,9 +205,11 @@
   }
   .search-bar input::placeholder{color:var(--ink-400);}
   .mic{
-    width:28px;height:28px;border-radius:50%;background:var(--emerald-700);
+    width:28px;height:28px;border-radius:50%;background:var(--secondary);
     color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;
   }
+  .mic .ico{color:#fff;}
+  .mic .ico svg{stroke:#fff; stroke-width:2.6;}
 
   /* Wallet Hero */
   .wallet-section{padding:16px 20px 6px;}
@@ -210,12 +217,10 @@
     position:relative;
     border-radius:26px;
     padding:22px 22px 18px;
-    background:
-      radial-gradient(120% 140% at 100% 0%, rgba(255,255,255,0.14), transparent 55%),
-      linear-gradient(135deg, var(--emerald-900) 0%, var(--emerald-700) 48%, var(--blue-600) 130%);
+    background:linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
     color:#fff;
     overflow:hidden;
-    box-shadow:0 18px 34px -14px rgba(6,60,46,0.55);
+    box-shadow:0 12px 24px -16px rgba(16,37,60,0.28);
   }
   .wallet-card::after{
     content:"";
@@ -254,7 +259,28 @@
   .section-head h3{
     font-family:'Manrope'; font-size:15.5px; font-weight:800; margin:0; color:var(--ink-900);
   }
-  .section-head a{font-size:12px; color:var(--emerald-700); font-weight:700; text-decoration:none; cursor:pointer;}
+  .section-head a{font-size:12px; color:var(--secondary); font-weight:700; text-decoration:none; cursor:pointer;}
+
+  .list-screen-shell{display:flex; flex:1; flex-direction:column; gap:14px; min-height:100%;}
+  .list-stack{display:flex; flex-direction:column; gap:8px;}
+
+  /* Placeholder map above lists (lightweight, non-interactive) */
+  .map-placeholder{height:200px; border-radius:14px; background-color:#f7f7f7; border:1px solid rgba(16,37,60,0.04); display:flex; align-items:center; justify-content:center; margin-bottom:14px; overflow:hidden; background-size:cover; background-position:center; background-repeat:no-repeat;}
+  .map-placeholder[data-img="true"]{background-image:url('luanda-map.png');}
+  .map-ph-inner{position:relative; width:100%; height:100%;}
+  .map-ph-pin{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:var(--primary); z-index:20;}
+
+  /* Map overlay to mimic on-demand UI (pickup/destination + bottom ETA/CTA) */
+  .map-overlay{position:absolute; left:12px; right:12px; top:12px; bottom:12px; pointer-events:none; z-index:15;}
+  .map-top{pointer-events:auto; display:flex; justify-content:space-between; gap:10px; align-items:center; background:rgba(255,255,255,0.95); border-radius:12px; padding:10px 12px; font-size:13px; color:var(--ink-600);}
+  .map-top .map-loc, .map-top .map-dest{display:flex; align-items:center; gap:8px; flex:1; min-width:0;}
+  .map-top .map-dest{justify-content:flex-end; color:var(--ink-400);}
+  .map-bottom{position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-between; gap:12px; align-items:center; pointer-events:auto;}
+  .map-bottom .eta{background:rgba(255,255,255,0.95); padding:10px 12px; border-radius:12px; font-weight:700; color:var(--ink-900);}
+  .map-bottom .map-cta{background:linear-gradient(135deg,var(--secondary) 0%, var(--primary) 100%); color:#fff; padding:10px 14px; border-radius:12px; font-weight:800;}
+
+  /* Ensure CTA in lists is visible above the bottom nav */
+  .list-screen-shell .continue-btn{margin:16px 0 calc(110px + env(safe-area-inset-bottom)); position:relative; z-index:30;}
 
   /* Grid quick actions */
   .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
@@ -404,16 +430,16 @@
     padding:10px 8px 22px;
   }
   .nav-item{display:flex; flex-direction:column; align-items:center; gap:3px; font-size:9.5px; color:var(--ink-400); font-weight:700; cursor:pointer;}
-  .nav-item.active{color:var(--emerald-700);}
+  .nav-item.active{color:var(--secondary);}
   .nav-ico{font-size:18px;}
 
   /* FAB */
   .fab{
     position:absolute; right:20px; bottom:92px; z-index:41;
     width:58px;height:58px;border-radius:50%;
-    background:linear-gradient(135deg,var(--emerald-500),var(--emerald-900));
+    background:linear-gradient(135deg,var(--secondary) 0%, var(--primary) 100%);
     display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;
-    box-shadow:0 10px 22px -6px rgba(11,107,79,0.6);
+    box-shadow:0 10px 22px -6px rgba(69,122,189,0.25);
     border:3px solid #fff; cursor:pointer;
   }
 
@@ -436,6 +462,9 @@
     display:flex; align-items:center; gap:12px;
     padding:18px 18px 14px;
   }
+  #listBody{display:flex; flex:1; flex-direction:column; padding:20px 20px 140px;}
+  .list-screen-shell{display:flex; flex:1; flex-direction:column; gap:14px; min-height:100%;}
+  .list-screen-shell .continue-btn{margin:auto 0 0;}
   .back-btn{
     width:36px;height:36px;border-radius:50%;background:var(--card);
     display:flex;align-items:center;justify-content:center;font-size:16px;
@@ -485,7 +514,7 @@
     display:flex; flex-direction:column; align-items:center; gap:6px;
     box-shadow:0 2px 8px rgba(14,31,26,0.05); border:2px solid transparent; cursor:pointer;
   }
-  .chip-card.selected{border-color:var(--emerald-700); background:#EEF7F3;}
+  .chip-card.selected{border-color:var(--secondary); background:rgba(69,122,189,0.10);} 
   .chip-logo{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;font-weight:800;font-family:'Manrope';}
   .chip-card span{font-size:11px; font-weight:700; text-align:center;}
 
@@ -503,12 +532,12 @@
     text-align:center; font-size:12.5px; font-weight:700; box-shadow:0 2px 8px rgba(14,31,26,0.05);
     border:2px solid transparent; cursor:pointer;
   }
-  .amount-chip.selected{border-color:var(--emerald-700); background:#EEF7F3; color:var(--emerald-700);}
+  .amount-chip.selected{border-color:var(--secondary); background:rgba(69,122,189,0.10); color:var(--secondary);}
   .continue-btn{
-    margin:24px 20px 0; background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));
+    margin:24px 20px 0; background:linear-gradient(135deg,var(--secondary) 0%, var(--primary) 100%);
     color:#fff; text-align:center; padding:15px 0; border-radius:16px;
     font-family:'Manrope'; font-weight:800; font-size:14px;
-    box-shadow:0 12px 22px -10px rgba(11,107,79,0.6); cursor:pointer;
+    box-shadow:0 10px 18px -12px rgba(69,122,189,0.28); cursor:pointer;
   }
   .summary-card{
     margin:16px 20px 0; background:var(--card); border-radius:16px; padding:14px 16px;
@@ -519,11 +548,11 @@
 
   /* ===== Generic LIST template ===== */
   .list-row{
-    background:var(--card); border-radius:16px; padding:12px 14px; margin:0 20px 12px;
+    background:var(--card); border-radius:16px; padding:12px 14px; margin:0 0 12px;
     display:flex; align-items:center; gap:12px; box-shadow:0 2px 8px rgba(14,31,26,0.05); cursor:pointer;
     border:2px solid transparent;
   }
-  .list-row.selected{border-color:var(--emerald-700); background:#EEF7F3;}
+  .list-row.selected{border-color:var(--secondary); background:rgba(69,122,189,0.10);} 
   .list-ico{width:42px;height:42px;border-radius:13px; display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff; flex-shrink:0;}
   .list-mid{flex:1;}
   .list-name{font-size:13px; font-weight:700;}
@@ -565,7 +594,7 @@
   .sheet-row .k{color:var(--ink-600);}
   .sheet-row .v{font-weight:700;}
   .sheet-cta{
-    margin-top:16px; background:linear-gradient(135deg,var(--emerald-700),var(--emerald-900));
+    margin-top:16px; background:linear-gradient(135deg,var(--secondary) 0%, var(--primary) 100%);
     color:#fff; text-align:center; padding:14px 0; border-radius:15px;
     font-family:'Manrope'; font-weight:800; font-size:13.5px; cursor:pointer;
   }
@@ -591,7 +620,8 @@
   .search-bar .ico{color:var(--ink-400); font-size:17px;}
   .cat-ico{color:var(--emerald-700);}
   .act-ico{color:var(--ink-600);}
-  .star-ico{color:var(--warning); width:11px; height:11px; display:inline-block; vertical-align:-1px;}
+  .star-ico{color:#fff; width:11px; height:11px; display:inline-block; vertical-align:-1px;}
+  .star-ico svg{stroke:#fff; stroke-width:2.2;}
 </style>
 </head>
 <body>
@@ -602,14 +632,14 @@
     <!-- Header -->
     <div class="header">
       <div class="greet-block">
-        <div class="avatar">J</div>
+        <div class="avatar tappable" data-act="profile">J</div>
         <div class="greet-text">
           <div class="hi">Hi, João Nzau</div>
           <div class="loc"><i class="ico" data-icon="mappin" style="font-size:11px;"></i> Luanda, Angola</div>
         </div>
       </div>
       <div class="header-actions">
-        <div class="lang-toggle">PT / EN / FR / 中文</div>
+        <div class="lang-toggle tappable" data-act="language">PT / EN / FR / 中文</div>
         <div class="icon-btn tappable" data-act="notifications"><i class="ico" data-icon="bell"></i><span class="dot"></span></div>
       </div>
     </div>
@@ -659,12 +689,12 @@
     <div class="section">
       <div class="section-head"><h3>Pay for Services</h3></div>
       <div class="grid3">
-        <div class="grid-item tappable" data-act="epal"><div class="grid-ico" style="background:var(--blue-600);"><i class="ico" data-icon="droplet"></i></div><span>EPAL Water</span></div>
-        <div class="grid-item tappable" data-act="zap"><div class="grid-ico" style="background:var(--emerald-700);"><i class="ico" data-icon="radio"></i></div><span>ZAP</span></div>
-        <div class="grid-item tappable" data-act="nossaseguros"><div class="grid-ico" style="background:var(--orange-500);"><i class="ico" data-icon="shield"></i></div><span>Nossa Seguros</span></div>
-        <div class="grid-item tappable" data-act="sanlam"><div class="grid-ico" style="background:var(--error);"><i class="ico" data-icon="heartpulse"></i></div><span>Sanlam Vida</span></div>
-        <div class="grid-item tappable" data-act="unitel"><div class="grid-ico" style="background:var(--emerald-500);"><i class="ico" data-icon="smartphone"></i></div><span>Unitel Recarga</span></div>
-        <div class="grid-item tappable" data-act="zulubet"><div class="grid-ico" style="background:var(--ink-600);"><i class="ico" data-icon="trophy"></i></div><span>Zulubet</span></div>
+        <div class="grid-item tappable" data-act="epal"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="droplet"></i></div><span>EPAL Water</span></div>
+        <div class="grid-item tappable" data-act="zap"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="radio"></i></div><span>ZAP</span></div>
+        <div class="grid-item tappable" data-act="nossaseguros"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="shield"></i></div><span>Nossa Seguros</span></div>
+        <div class="grid-item tappable" data-act="sanlam"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="heartpulse"></i></div><span>Sanlam Vida</span></div>
+        <div class="grid-item tappable" data-act="ende"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="zap"></i></div><span>ENDE</span></div>
+        <div class="grid-item tappable" data-act="enbi"><div class="grid-ico" style="background:var(--primary);"><i class="ico" data-icon="droplet"></i></div><span>ENBI</span></div>
       </div>
     </div>
 
@@ -672,9 +702,9 @@
     <div class="section">
       <div class="section-head"><h3>On-demand Delivery</h3></div>
       <div class="grid3">
-        <div class="grid-item tappable" data-act="food"><div class="grid-ico" style="background:var(--error);"><i class="ico" data-icon="utensils"></i></div><span>Food</span></div>
-        <div class="grid-item tappable" data-act="groceries"><div class="grid-ico" style="background:var(--emerald-700);"><i class="ico" data-icon="cart"></i></div><span>Groceries</span></div>
-        <div class="grid-item tappable" data-act="pharma"><div class="grid-ico" style="background:var(--success);"><i class="ico" data-icon="pill"></i></div><span>Pharma</span></div>
+        <div class="grid-item tappable" data-act="food"><div class="grid-ico" style="background:var(--secondary);"><i class="ico" data-icon="utensils"></i></div><span>Food</span></div>
+        <div class="grid-item tappable" data-act="groceries"><div class="grid-ico" style="background:var(--secondary);"><i class="ico" data-icon="cart"></i></div><span>Groceries</span></div>
+        <div class="grid-item tappable" data-act="pharma"><div class="grid-ico" style="background:var(--secondary);"><i class="ico" data-icon="pill"></i></div><span>Pharma</span></div>
       </div>
     </div>
 
@@ -682,9 +712,9 @@
     <div class="section">
       <div class="section-head"><h3>On-demand Mobility</h3></div>
       <div class="grid3">
-        <div class="grid-item tappable" data-act="moto"><div class="grid-ico" style="background:var(--orange-500);"><i class="ico" data-icon="motorbike"></i></div><span>Moto-Taxi</span></div>
-        <div class="grid-item tappable" data-act="transit"><div class="grid-ico" style="background:var(--blue-600);"><i class="ico" data-icon="bus"></i></div><span>Transit</span></div>
-        <div class="grid-item tappable" data-act="courier"><div class="grid-ico" style="background:var(--ink-600);"><i class="ico" data-icon="package"></i></div><span>Courier</span></div>
+        <div class="grid-item tappable" data-act="moto"><div class="grid-ico" style="background:var(--secondary-dark);"><i class="ico" data-icon="motorbike"></i></div><span>Moto-Taxi</span></div>
+        <div class="grid-item tappable" data-act="transit"><div class="grid-ico" style="background:var(--secondary-dark);"><i class="ico" data-icon="bus"></i></div><span>Transit</span></div>
+        <div class="grid-item tappable" data-act="courier"><div class="grid-ico" style="background:var(--secondary-dark);"><i class="ico" data-icon="package"></i></div><span>Courier</span></div>
       </div>
     </div>
 
@@ -926,9 +956,32 @@
   /* ---------- LIST template ---------- */
   function buildList(cfg){
     $('#listTitle').textContent = cfg.title;
-    let html = '';
+    let html = `<div class="list-screen-shell">`;
+    if(cfg.map){
+      if(cfg.mapImage){
+        html += `<div class="map-placeholder" style="background-image:url('${cfg.mapImage}')">
+          <div class="map-ph-inner">
+            <div class="map-ph-pin"></div>
+            <div class="map-overlay">
+              <div class="map-top"><div class="map-loc"><i class="ico" data-icon="mappin"></i><span>Pickup: Current location</span></div><div class="map-dest"><span>Enter destination</span><i class="ico" data-icon="chevronright"></i></div></div>
+              <div class="map-bottom"><div class="eta">3 min · AOA 800</div></div>
+            </div>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="map-placeholder" data-img="true">
+          <div class="map-ph-inner">
+            <div class="map-ph-pin"></div>
+            <div class="map-overlay">
+              <div class="map-top"><div class="map-loc"><i class="ico" data-icon="mappin"></i><span>Pickup: Current location</span></div><div class="map-dest"><span>Enter destination</span><i class="ico" data-icon="chevronright"></i></div></div>
+              <div class="map-bottom"><div class="eta">3 min · AOA 800</div></div>
+            </div>
+          </div>
+        </div>`;
+      }
+    }
     if(cfg.subheader){ html += `<div class="field-block" style="padding-top:0;"><div class="field-label">${cfg.subheader}</div></div>`; }
-    html += `<div style="padding-top:14px;">`;
+    html += `<div class="list-stack">`;
     cfg.items.forEach((it,i)=>{
       html += `<div class="list-row${i===0?' selected':''}" onclick="selectRow(this)">
         <div class="list-ico" style="background:${it.color}"><i class="ico" data-icon="${it.icon}"></i></div>
@@ -938,6 +991,7 @@
     });
     html += `</div>`;
     if(cfg.cta){ html += `<div class="continue-btn tappable">${cfg.cta}</div>`; }
+    html += `</div>`;
     $('#listBody').innerHTML = html;
     renderIcons($('#listBody'));
     openScreen('listScreen');
@@ -1003,6 +1057,14 @@
       fieldLabel:'Customer number', fieldPrefixIcon:'hash', fieldPlaceholder:'ZP-88231',
       amounts:[6000,12000,18000,25000], summaryLabel:'Paying', summaryValue:'ZAP Telecom', cta:'Pay Bill'}),
 
+    ende: () => buildForm({title:'ENDE Electricity', chipsLabel:'Biller', chips:[{label:'ENDE', letter:'E', color:'var(--primary)'}],
+      fieldLabel:'Customer number', fieldPrefixIcon:'hash', fieldPlaceholder:'ENDE account number',
+      amounts:[5000,12000,20000,50000], summaryLabel:'Paying', summaryValue:'ENDE Electricity', cta:'Pay Bill'}),
+
+    enbi: () => buildForm({title:'ENBI', chipsLabel:'Biller', chips:[{label:'ENBI', letter:'B', color:'var(--primary)'}],
+      fieldLabel:'Customer number', fieldPrefixIcon:'hash', fieldPlaceholder:'ENBI account number',
+      amounts:[2000,5000,10000,20000], summaryLabel:'Paying', summaryValue:'ENBI', cta:'Pay Bill'}),
+
     nossaseguros: () => buildForm({title:'Nossa Seguros', chipsLabel:'Insurer', chips:[{label:'Nossa Seguros', letter:'N', color:'var(--orange-500)'}],
       fieldLabel:'Policy number', fieldPrefixIcon:'filetext', fieldPlaceholder:'Enter policy number',
       amounts:[8000,15000,25000,40000], summaryLabel:'Paying premium for', summaryValue:'Nossa Seguros', cta:'Pay Premium'}),
@@ -1019,32 +1081,32 @@
       fieldLabel:'Zulubet account / phone number', fieldPrefixIcon:'ticket', fieldPlaceholder:'Enter account number',
       amounts:[1000,2000,5000,10000], summaryLabel:'Funding', summaryValue:'Zulubet Account', cta:'Fund Account'}),
 
-    moto: () => buildList({title:'Moto-Taxi', subheader:'From: Current location  <i class="ico" data-icon="chevronright" style="width:11px;height:11px;"></i>  To: Enter destination', items:[
+    moto: () => buildList({title:'Moto-Taxi', subheader:'From: Current location  <i class="ico" data-icon="chevronright" style="width:11px;height:11px;"></i>  To: Enter destination', map:true, items:[
         {icon:'motorbike', color:'var(--orange-500)', name:'Moto Economy', sub:'1 seat · fastest through traffic', price:'AOA 800', meta:'3 min'},
         {icon:'motorbike', color:'var(--emerald-700)', name:'Moto Comfort', sub:'Experienced rider, helmet included', price:'AOA 1,100', meta:'5 min'},
         {icon:'moon', color:'var(--blue-600)', name:'Moto Night', sub:'Late-night rides, reflective gear', price:'AOA 1,400', meta:'7 min'}], cta:'Confirm Ride'}),
 
-    transit: () => buildList({title:'Transit', subheader:'Intercity & intracity routes', items:[
+    transit: () => buildList({title:'Transit', subheader:'Intercity & intracity routes', map:true, items:[
         {icon:'busfront', color:'var(--emerald-700)', name:'Kubinga Shared Van', sub:'Intracity · fixed route', price:'AOA 400', meta:'12 min'},
         {icon:'bus', color:'var(--blue-600)', name:'Luanda to Benguela', sub:'Intercity bus', price:'AOA 6,500', meta:'6 hrs'},
         {icon:'bus', color:'var(--orange-500)', name:'Luanda to Huambo', sub:'Intercity bus', price:'AOA 7,200', meta:'7 hrs'}], cta:'Book Seat'}),
 
-    courier: () => buildList({title:'Send a Package', subheader:'Choose delivery speed', items:[
+    courier: () => buildList({title:'Send a Package', subheader:'Choose delivery speed', map:true, items:[
         {icon:'motorbike', color:'var(--orange-500)', name:'Same-day Moto', sub:'Small packages, under 5kg', price:'AOA 1,200', meta:'2–4 hrs'},
         {icon:'package', color:'var(--emerald-700)', name:'Standard Package', sub:'Up to 20kg', price:'AOA 2,800', meta:'Next day'},
         {icon:'zap', color:'var(--blue-600)', name:'Express', sub:'Priority handling', price:'AOA 4,500', meta:'60–90 min'}], cta:'Schedule Pickup'}),
 
-    food: () => buildList({title:'Food Delivery', subheader:'Restaurants near you', items:[
+    food: () => buildList({title:'Food Delivery', subheader:'Restaurants near you', map:true, items:[
         {icon:'utensils', color:'var(--error)', name:'Chicken Spot', sub:'Fast food · 4.6 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 3,500', meta:'25–35 min'},
         {icon:'utensilscrossed', color:'var(--orange-500)', name:'Sabor de Angola', sub:'Local cuisine · 4.8 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 5,200', meta:'30–40 min'},
         {icon:'utensils', color:'var(--emerald-700)', name:'Luanda Pizza Co.', sub:'Pizza & pasta · 4.5 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 4,000', meta:'20–30 min'}], cta:'View Menu'}),
 
-    groceries: () => buildList({title:'Groceries', subheader:'Supermarkets near you', items:[
+    groceries: () => buildList({title:'Groceries', subheader:'Supermarkets near you', map:true, items:[
         {icon:'cart', color:'var(--emerald-700)', name:'Kero Supermarket', sub:'Fresh produce & pantry · 4.6 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 2,000', meta:'35–45 min'},
         {icon:'store', color:'var(--blue-600)', name:'Shoprite Luanda', sub:'Groceries & household · 4.5 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 2,500', meta:'40–50 min'},
         {icon:'basket', color:'var(--orange-500)', name:'Candando', sub:'Local market basket · 4.4 <i class="ico" data-icon="star" style="width:10px;height:10px;color:var(--warning);"></i>', price:'AOA 1,800', meta:'30–40 min'}], cta:'Start Shopping'}),
 
-    pharma: () => buildList({title:'Pharma', subheader:'Nearby pharmacies', items:[
+    pharma: () => buildList({title:'Pharma', subheader:'Nearby pharmacies', map:true, items:[
         {icon:'pill', color:'var(--success)', name:'Farmácia Central', sub:'620m · Open now', price:'', meta:'Delivers'},
         {icon:'pill', color:'var(--blue-600)', name:'Farmácia Nova Vida', sub:'890m · Open now', price:'', meta:'Delivers'},
         {icon:'pill', color:'var(--orange-500)', name:'Farmácia São Paulo', sub:'1.4km · Closes 9pm', price:'', meta:'Pickup only'}], cta:'Order Medicine'}),
@@ -1064,6 +1126,15 @@
 
     notifications: () => buildSheet({title:'Notifications', subtitle:'3 new updates', icon:'bell', color:'var(--emerald-700)',
       menu:[{icon:'receive',label:'You received AOA 25,000 from Marta S.'},{icon:'zap',label:'Electricity bill due tomorrow'},{icon:'percent',label:'20% cashback on bill payments'}]}),
+
+    language: () => buildSheet({title:'Language', subtitle:'Select your preferred language', icon:'globe', color:'var(--blue-600)',
+      menu:[
+        {icon:'globe',label:'Português (PT)'} ,
+        {icon:'globe',label:'English (EN)'},
+        {icon:'globe',label:'Français (FR)'},
+        {icon:'globe',label:'中文 (ZH)'}
+      ],
+      cta:'Save Language'}),
 
     search: () => buildSheet({title:'Search', subtitle:'Try a service, bill or transfer', icon:'search', color:'var(--blue-600)',
       menu:[{icon:'arrowupright',label:'Send Money'},{icon:'droplet',label:'EPAL Water Bill'},{icon:'smartphone',label:'Unitel Recarga'},{icon:'motorbike',label:'Moto-Taxi'}]}),
