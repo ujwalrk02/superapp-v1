@@ -118,7 +118,7 @@
     margin:0; padding:22px 20px 28px;
     background:var(--secondary);
     color:#fff; position:relative; overflow:hidden;
-    border-radius:0;
+    border-radius:0; flex-shrink:0;
   }
   .hero-banner.hero-card{ border-radius:22px; padding:20px; box-shadow:0 12px 24px -16px rgba(16,37,60,0.28); }
   .hero-top{display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:1; gap:10px;}
@@ -794,6 +794,8 @@
     if(v2) v2.textContent = hidden ? maskValue(v2.getAttribute('data-value')) : v2.getAttribute('data-value');
     const eye = document.getElementById('eyeIcon');
     if(eye){ eye.setAttribute('data-icon', hidden ? 'eye' : 'eyeoff'); renderIcons(eye.parentElement); }
+    const eye2 = document.getElementById('eyeIcon2');
+    if(eye2){ eye2.setAttribute('data-icon', hidden ? 'eye' : 'eyeoff'); renderIcons(eye2.parentElement); }    
   }
   function toggleBalance(e){
     if(e){ e.stopPropagation(); }
@@ -927,8 +929,8 @@
     if(withHero){
       html += `<div class="hero-banner hero-card" style="margin:0 0 18px;">
         <div class="hero-top"><div><div class="hero-greet" style="font-size:13px; opacity:0.85; font-weight:700;">Available Balance</div><div class="hero-greet balance-echo" id="balanceValue2" data-value="AOA 30,402.54" style="font-size:24px; margin-top:2px;">AOA 30,402.54</div></div>
-        <div class="hero-cta" style="margin-top:0;"><i class="ico star-ico" data-icon="star" style="color:var(--secondary);"></i> 208 pts</div></div>
-      </div>`;
+        <div class="hero-cta tappable" style="margin-top:0; padding:8px 11px;" onclick="toggleBalance(event)" title="Toggle balance visibility"><i class="ico" id="eyeIcon2" data-icon="eye" style="color:var(--secondary);"></i></div></div>
+    </div>`;
     }
     html += `<div class="field-label" style="margin-bottom:10px;">Recent Transactions</div><div class="activity-list">`;
     html += HISTORY.map((h,i)=>`
