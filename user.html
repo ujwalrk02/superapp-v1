@@ -1236,7 +1236,7 @@
         {icon:'globe', color:'var(--secondary)', name:'Language', sub:'Português / English / Français / 中文'},
         {icon:'messagecircle', color:'var(--secondary)', name:'Help & Support', sub:'Chat with us'}
       ].map(it=>`<div class="list-row"><div class="list-ico" style="background:${it.color}"><i class="ico" data-icon="${it.icon}"></i></div><div class="list-mid"><div class="list-name">${it.name}</div><div class="list-sub">${it.sub}</div></div><div class="list-right"><i class="ico" data-icon="chevronright" style="width:16px;height:16px;color:var(--ink-400);"></i></div></div>`).join('') + `
-      <div class="list-row tappable" onclick="userLogout()" style="margin-top:8px;">
+      <div class="list-row tappable" onclick="userLogout()">
         <div class="list-ico" style="background:#C0392B;"><i class="ico" data-icon="logout"></i></div>
         <div class="list-mid"><div class="list-name">Logout</div><div class="list-sub">Sign out of your AkiPaga wallet</div></div>
         <div class="list-right"><i class="ico" data-icon="chevronright" style="width:16px;height:16px;color:var(--ink-400);"></i></div>
