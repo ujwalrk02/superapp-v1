@@ -1,4 +1,4 @@
-# kwattel_v2
+# AkiPaga - User + Merchant Demo
 
 Mobile wallet UI prototype (AkiPaga) built with plain HTML, CSS and JavaScript. No build step or dependencies.
 
